@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大学生求职服务 · Alex Hu</title>
+<style>
+/* ===== CSS Reset & Base ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue-1:#003A9B; --blue-2:#0052D9; --blue-3:#4A8CFF;
+  --blue-4:#94BFFF; --blue-5:#D9E8FF; --blue-6:#E0ECFF;
+  --blue-7:#F0F5FF; --gray-1:#1A1A2E; --gray-2:#2D2D44;
+  --gray-3:#6B7280; --gray-4:#9CA3AF; --gray-5:#E5E7EB;
+  --gray-6:#F3F4F6; --white:#FFFFFF; --gold:#F59E0B;
+  --green:#10B981; --red:#EF4444;
+  --section-num-size:clamp(4rem,8vw,8rem);
+  --section-pad:clamp(4rem,8vw,8rem);
+  --max-w:1200px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  background:var(--white);color:var(--gray-1);line-height:1.7;overflow-x:hidden;
+}
+
+/* ===== prefers-reduced-motion ===== */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .hero-particles{display:none!important}
+  .countup-num{opacity:1!important}
+}
+
+/* ===== Progress Bar ===== */
+.progress-bar{
+  position:fixed;top:0;left:0;width:0;height:3px;
+  background:linear-gradient(90deg,var(--blue-2),var(--blue-3));
+  z-index:1001;transition:width 0.3s ease;
+}
+
+/* ===== Sticky Section Numbers ===== */
+.section-wrapper{position:relative}
+.section-number{
+  position:sticky;top:2rem;z-index:1;
+  font-size:var(--section-num-size);font-weight:900;
+  color:var(--blue-5);line-height:1;user-select:none;
+  pointer-events:none;opacity:0.7;
+}
+
+/* ===== Hero ===== */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--blue-1) 0%,var(--blue-2) 40%,var(--blue-3) 100%);
+  overflow:hidden;padding:2rem;
+}
+.hero-particles{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;
+}
+.hero-particle{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,0.08);animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{transform:translateY(-10vh) scale(1);opacity:0}
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(74,140,255,0.3) 0%,transparent 60%),
+             radial-gradient(ellipse at 70% 80%,rgba(0,82,217,0.2) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;max-width:800px;
+}
+.hero-badge{
+  display:inline-block;padding:0.4rem 1.2rem;border-radius:999px;
+  background:rgba(255,255,255,0.15);color:var(--blue-5);
+  font-size:0.85rem;letter-spacing:0.05em;margin-bottom:1.5rem;
+  backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.1);
+}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,4rem);font-weight:800;color:var(--white);
+  line-height:1.2;margin-bottom:1rem;
+}
+.hero h1 span{background:linear-gradient(135deg,#fff,var(--blue-4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{
+  font-size:clamp(1rem,2vw,1.25rem);color:var(--blue-5);margin-bottom:2.5rem;line-height:1.8;
+}
+.hero-stats{
+  display:flex;justify-content:center;gap:clamp(1.5rem,4vw,4rem);flex-wrap:wrap;
+}
+.hero-stat{text-align:center}
+.hero-stat-num{
+  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--white);line-height:1;
+}
+.hero-stat-label{font-size:0.85rem;color:var(--blue-4);margin-top:0.3rem}
+.hero-cta{
+  margin-top:2.5rem;display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.9rem 2.5rem;border-radius:999px;
+  background:var(--white);color:var(--blue-2);font-weight:700;font-size:1.05rem;
+  text-decoration:none;transition:all 0.3s ease;box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.hero-cta svg{width:20px;height:20px;transition:transform 0.3s}
+.hero-cta:hover svg{transform:translateX(4px)}
+.hero-scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.3rem;
+  color:var(--blue-4);font-size:0.75rem;animation:bounceDown 2s infinite;
+  cursor:pointer;z-index:2;background:none;border:none;
+}
+@keyframes bounceDown{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.hero-scroll-hint svg{width:24px;height:24px;}
+
+/* ===== Section Common ===== */
+.section{padding:var(--section-pad) 2rem;position:relative;overflow:hidden}
+.section-inner{max-width:var(--max-w);margin:0 auto;position:relative;z-index:2}
+.section-label{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.85rem;font-weight:600;color:var(--blue-2);text-transform:uppercase;
+  letter-spacing:0.1em;margin-bottom:0.8rem;
+}
+.section-label::before{content:'';width:24px;height:2px;background:var(--blue-2)}
+.section-title{
+  font-size:clamp(1.6rem,3vw,2.5rem);font-weight:800;color:var(--gray-1);
+  margin-bottom:1rem;line-height:1.3;
+}
+.section-desc{font-size:1.05rem;color:var(--gray-3);max-width:640px;margin-bottom:3rem;line-height:1.8}
+.section-alt{background:var(--blue-7)}
+.section-dark{background:var(--gray-1);color:var(--white)}
+.section-dark .section-title{color:var(--white)}
+.section-dark .section-desc{color:var(--gray-4)}
+.section-dark .section-number{color:rgba(255,255,255,0.06)}
+
+/* ===== Reveal Animations ===== */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+
+/* ===== Services Grid ===== */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.service-card{
+  background:var(--white);border-radius:16px;padding:2rem;
+  border:1px solid var(--gray-5);transition:all 0.3s ease;
+  position:relative;overflow:hidden;
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--blue-2),var(--blue-3));
+}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,82,217,0.1);border-color:var(--blue-4)}
+.service-icon{
+  width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:1rem;
+}
+.service-card h3{font-size:1.2rem;font-weight:700;margin-bottom:0.6rem;color:var(--gray-1)}
+.service-card p{font-size:0.92rem;color:var(--gray-3);line-height:1.7;margin-bottom:1rem}
+.service-tag{
+  display:inline-block;padding:0.2rem 0.8rem;border-radius:999px;
+  background:var(--blue-6);color:var(--blue-2);font-size:0.78rem;font-weight:600;
+}
+.service-badge{
+  display:inline-block;padding:0.15rem 0.6rem;border-radius:4px;
+  font-size:0.78rem;font-weight:700;margin-left:0.4rem;
+}
+.badge-popular{background:linear-gradient(135deg,var(--gold),#F97316);color:var(--white)}
+.badge-new{background:linear-gradient(135deg,var(--green),#059669);color:var(--white)}
+
+/* ===== Case Cards ===== */
+.cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.case-card{
+  background:var(--white);border-radius:16px;overflow:hidden;
+  border:1px solid var(--gray-5);transition:all 0.3s ease;
+}
+.case-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,82,217,0.1)}
+.case-card-header{
+  padding:1.5rem 1.5rem 0;display:flex;justify-content:space-between;align-items:flex-start;
+}
+.case-card-header h3{font-size:1.1rem;font-weight:700;color:var(--gray-1)}
+.case-result{
+  display:inline-flex;align-items:center;gap:0.3rem;
+  padding:0.25rem 0.8rem;border-radius:999px;
+  background:#D1FAE5;color:#065F46;font-size:0.78rem;font-weight:700;
+  white-space:nowrap;
+}
+.case-card-body{padding:0.5rem 1.5rem 1.5rem}
+.case-detail{font-size:0.92rem;color:var(--gray-3);line-height:1.7}
+.case-stats{
+  display:flex;gap:1.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--gray-5);
+}
+.case-stat-item{text-align:center}
+.case-stat-val{font-size:1.1rem;font-weight:800;color:var(--blue-2)}
+.case-stat-lbl{font-size:0.75rem;color:var(--gray-4)}
+
+/* ===== Pricing ===== */
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;
+  align-items:start;
+}
+.pricing-card{
+  background:var(--white);border-radius:16px;padding:2rem;
+  border:1px solid var(--gray-5);text-align:center;
+  transition:all 0.3s ease;position:relative;
+}
+.pricing-card.featured{
+  border-color:var(--blue-2);box-shadow:0 8px 30px rgba(0,82,217,0.15);
+  transform:scale(1.03);
+}
+.pricing-card.featured:hover{transform:scale(1.03) translateY(-4px)}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+.pricing-popular{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  padding:0.25rem 1.2rem;border-radius:999px;
+  background:linear-gradient(135deg,var(--blue-2),var(--blue-3));
+  color:var(--white);font-size:0.78rem;font-weight:700;
+}
+.pricing-name{font-size:1rem;font-weight:700;color:var(--gray-2);margin-bottom:0.5rem}
+.pricing-price{
+  font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;color:var(--blue-2);
+  margin-bottom:0.3rem;
+}
+.pricing-price small{font-size:0.9rem;font-weight:600;color:var(--gray-3)}
+.pricing-original{font-size:0.85rem;color:var(--gray-4);text-decoration:line-through;margin-bottom:0.5rem}
+.pricing-desc{font-size:0.88rem;color:var(--gray-3);margin-bottom:1.2rem;line-height:1.6}
+.pricing-features{list-style:none;text-align:left;margin-bottom:1.5rem}
+.pricing-features li{
+  position:relative;padding:0.4rem 0 0.4rem 1.5rem;
+  font-size:0.88rem;color:var(--gray-2);line-height:1.5;
+}
+.pricing-features li::before{
+  content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;
+}
+.pricing-btn{
+  display:inline-block;padding:0.7rem 2rem;border-radius:999px;
+  font-weight:700;font-size:0.92rem;text-decoration:none;
+  transition:all 0.3s;
+}
+.pricing-btn-primary{background:var(--blue-2);color:var(--white)}
+.pricing-btn-primary:hover{background:var(--blue-1)}
+.pricing-btn-outline{border:2px solid var(--blue-2);color:var(--blue-2)}
+.pricing-btn-outline:hover{background:var(--blue-2);color:var(--white)}
+
+/* ===== How It Works ===== */
+.steps{display:flex;flex-direction:column;gap:1rem;max-width:700px;margin:0 auto}
+.step{
+  display:flex;gap:1.2rem;align-items:flex-start;
+  padding:1.2rem 1.5rem;border-radius:12px;
+  background:var(--white);border:1px solid var(--gray-5);
+  transition:all 0.3s;
+}
+.step:hover{border-color:var(--blue-3);box-shadow:0 4px 16px rgba(0,82,217,0.08)}
+.step-num{
+  width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--blue-2);color:var(--white);font-weight:800;font-size:0.9rem;flex-shrink:0;
+}
+.step-content{flex:1}
+.step-content h4{font-size:1rem;font-weight:700;color:var(--gray-1);margin-bottom:0.2rem}
+.step-content p{font-size:0.88rem;color:var(--gray-3);line-height:1.6}
+
+/* ===== About Section ===== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:2rem}}
+.about-text .highlight{color:var(--blue-2);font-weight:700}
+.about-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+}
+.about-stat-card{
+  padding:1.5rem;text-align:center;border-radius:12px;
+  background:var(--white);border:1px solid var(--gray-5);
+}
+.about-stat-num{font-size:2rem;font-weight:800;color:var(--blue-2);line-height:1}
+.about-stat-label{font-size:0.82rem;color:var(--gray-3);margin-top:0.3rem}
+
+/* ===== CTA Footer ===== */
+.cta-section{
+  background:linear-gradient(135deg,var(--blue-1),var(--blue-2));
+  text-align:center;padding:4rem 2rem;
+}
+.cta-section h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--white);margin-bottom:0.8rem}
+.cta-section p{color:var(--blue-4);margin-bottom:2rem;font-size:1.05rem}
+.cta-section .hero-cta{margin-top:0}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  .hero-stats{gap:1.5rem}
+  .pricing-card.featured{transform:none}
+  .pricing-card.featured:hover{transform:translateY(-4px)}
+  .section-number{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge reveal">🔥 大学生求职 · 贴心陪跑</div>
+    <h1 class="reveal reveal-delay-1"><span>你的第一份工作，<br>我来帮你拿下</span></h1>
+    <p class="hero-sub reveal reveal-delay-2">从简历打磨到面试通关到 offer 谈判，<br class="hide-mobile">一站式求职陪跑服务，帮你告别焦虑、高效上岸</p>
+    <div class="hero-stats reveal reveal-delay-3">
+      <div class="hero-stat">
+        <div class="hero-stat-num"><span class="countup" data-target="200">0</span>+</div>
+        <div class="hero-stat-label">学员成功上岸</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num"><span class="countup" data-target="97">0</span>%</div>
+        <div class="hero-stat-label">简历通过率提升</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num"><span class="countup" data-target="85">0</span>%</div>
+        <div class="hero-stat-label">3个月内拿到 offer</div>
+      </div>
+    </div>
+    <a href="#pricing" class="hero-cta reveal reveal-delay-4">
+      立即了解服务
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <button class="hero-scroll-hint" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" aria-label="向下滚动">
+    <span>向下探索</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </button>
+</section>
+
+<!-- ===== ABOUT · 我是谁 ===== -->
+<div class="section-wrapper">
+<div class="section-number">01</div>
+<section class="section section-alt" id="about">
+  <div class="section-inner">
+    <div class="section-label reveal">About</div>
+    <h2 class="section-title reveal reveal-delay-1">我是谁</h2>
+    <p class="section-desc reveal reveal-delay-2">从 0 到 1 的求职实战派，帮你少走弯路</p>
+    <div class="about-grid">
+      <div class="about-text reveal reveal-delay-2">
+        <p style="margin-bottom:1rem">大家好，我是 <span class="highlight">Alex Hu</span>——广州大学在读生，同时也是钛动科技的海外广告优化专员，负责 Google Ads / Meta / TikTok 海外投放。</p>
+        <p style="margin-bottom:1rem">求职这件事，我太知道有多难了。所以在自己上岸之后，我开始做 <span class="highlight">大学生求职辅导</span>，把自己踩过的坑、试对的方法，沉淀成一套可复用的求职系统。</p>
+        <p>从简历优化到面试陪练到 offer 谈判，我帮 <span class="highlight">200+ 学员</span>拿下了互联网大厂、外企、优质民营企业的 offer。不讲虚的，只给能落地的。</p>
+      </div>
+      <div class="about-stats reveal reveal-delay-3">
+        <div class="about-stat-card">
+          <div class="about-stat-num"><span class="countup" data-target="200">0</span>+</div>
+          <div class="about-stat-label">辅导学员</div>
+        </div>
+        <div class="about-stat-card">
+          <div class="about-stat-num"><span class="countup" data-target="97">0</span>%</div>
+          <div class="about-stat-label">简历通过率</div>
+        </div>
+        <div class="about-stat-card">
+          <div class="about-stat-num"><span class="countup" data-target="3">0</span>年</div>
+          <div class="about-stat-label">求职辅导经验</div>
+        </div>
+        <div class="about-stat-card">
+          <div class="about-stat-num"><span class="countup" data-target="50">0</span>+</div>
+          <div class="about-stat-label">合作企业资源</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== SERVICES · 求职服务 ===== -->
+<div class="section-wrapper">
+<div class="section-number">02</div>
+<section class="section" id="services">
+  <div class="section-inner">
+    <div class="section-label reveal">Services</div>
+    <h2 class="section-title reveal reveal-delay-1">我的求职服务</h2>
+    <p class="section-desc reveal reveal-delay-2">针对大学生 &amp; 毕业 1-2 年求职者的痛点，提供分层级服务方案</p>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon" style="background:#FEF3C7;color:#D97706">📄</div>
+        <h3>简历精修 · 基础版 <span class="service-badge badge-new">¥128</span></h3>
+        <p>适合已经有初稿、只需要润色优化排版和措辞的同学。一次性交付，附修改建议说明。</p>
+        <span class="service-tag">1轮修改</span>
+        <span class="service-tag" style="margin-left:0.4rem">2个工作日内</span>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon" style="background:#DBEAFE;color:#2563EB">⭐</div>
+        <h3>简历深度优化 · 标准版 <span class="service-badge badge-new">¥168</span></h3>
+        <p>从岗位 JD 出发，帮你重新梳理经历亮点、优化 STAR 表达，突出核心竞争力。</p>
+        <span class="service-tag">2轮修改</span>
+        <span class="service-tag" style="margin-left:0.4rem">含语音沟通</span>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon" style="background:#D1FAE5;color:#059669">🏆</div>
+        <h3>简历全流程定制 · 旗舰版 <span class="service-badge badge-new">¥228</span></h3>
+        <p>从零到一全流程定制简历 + 求职信 + 作品集清单。附赠目标岗位 JD 匹配分析报告。</p>
+        <span class="service-tag">不限轮次修改</span>
+        <span class="service-tag" style="margin-left:0.4rem">含深度沟通</span>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon" style="background:#EDE9FE;color:#7C3AED">🎯</div>
+        <h3>求职陪跑 · 3个月 <span class="service-badge badge-popular">热门</span></h3>
+        <p><strong>¥799 / 3个月</strong>，全程陪跑。含简历优化 + 岗位推荐 + 面试辅导 +  offer 谈判，offer 后按月薪 20% 付费。不进大厂不收费。</p>
+        <span class="service-tag">最受欢迎</span>
+        <span class="service-tag" style="margin-left:0.4rem">性价比之选</span>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== HOW IT WORKS· 服务流程 ===== -->
+<div class="section-wrapper">
+<div class="section-number" style="color:rgba(255,255,255,0.06)">流程</div>
+<section class="section section-dark" id="process">
+  <div class="section-inner">
+    <div class="section-label reveal" style="color:var(--blue-4)">Process</div>
+    <h2 class="section-title reveal reveal-delay-1">服务流程</h2>
+    <p class="section-desc reveal reveal-delay-2">简单四步，高效上岸</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>需求诊断</h4>
+          <p>填写求职诊断问卷，我会根据你的背景、目标行业和岗位给出个性化建议</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>简历打磨</h4>
+          <p>基于岗位 JD 进行针对性简历优化，逐字逐句打磨你的职场第一张名片</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>面试陪练</h4>
+          <p>模拟面试 + 复盘，从自我介绍到行为面到专业面，打通面试全流程</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Offer 谈判</h4>
+          <p>收到 offer 后帮你评估、谈判，争取更好的薪资待遇，入职后持续跟进</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== CASES · 成功案例 ===== -->
+<div class="section-wrapper">
+<div class="section-number">03</div>
+<section class="section section-alt" id="cases">
+  <div class="section-inner">
+    <div class="section-label reveal">Success Stories</div>
+    <h2 class="section-title reveal reveal-delay-1">成功案例</h2>
+    <p class="section-desc reveal reveal-delay-2">看看学长学姐们如何用我们的服务拿到心仪 offer</p>
+    <div class="cases-grid">
+      <div class="case-card reveal">
+        <div class="case-card-header">
+          <h3>🧑‍🎓 小陈 · 某双非本科</h3>
+          <span class="case-result">✅ 月薪 12K 入职</span>
+        </div>
+        <div class="case-card-body">
+          <p class="case-detail">计算机专业，求职互联网产品运营。通过 3 个月陪跑服务，从简历一片空白到斩获 3 个 offer，最终入职某一线互联网公司产品运营岗。</p>
+          <div class="case-stats">
+            <div class="case-stat-item"><div class="case-stat-val">4</div><div class="case-stat-lbl">面试机会</div></div>
+            <div class="case-stat-item"><div class="case-stat-val">3</div><div class="case-stat-lbl">Offer 数</div></div>
+            <div class="case-stat-item"><div class="case-stat-val">60%</div><div class="case-stat-lbl">薪资涨幅</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1">
+        <div class="case-card-header">
+          <h3>🧑‍🎓 小张 · 某 211 本科</h3>
+          <span class="case-result">✅ 月薪 15K 入职</span>
+        </div>
+        <div class="case-card-body">
+          <p class="case-detail">市场营销专业，目标快消 / 电商行业。简历优化后投递回复率提升 3 倍，经过 8 轮面试辅导，最终拿下某头部跨境电商品牌运营 offer。</p>
+          <div class="case-stats">
+            <div class="case-stat-item"><div class="case-stat-val">12</div><div class="case-stat-lbl">投递回复</div></div>
+            <div class="case-stat-item"><div class="case-stat-val">5</div><div class="case-stat-lbl">面试机会</div></div>
+            <div class="case-stat-item"><div class="case-stat-val">2</div><div class="case-stat-lbl">Offer 数</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2">
+        <div class="case-card-header">
+          <h3>👩‍🎓 小李 · 普通二本</h3>
+          <span class="case-result">✅ 月薪 9K 入职</span>
+        </div>
+        <div class="case-card-body">
+          <p class="case-detail">英语专业跨行求职，零运营经验。通过深度简历优化挖掘过往项目亮点，配合面试话术训练，2 个月内拿到互联网公司社群运营岗 offer。</p>
+          <div class="case-stats">
+            <div class="case-stat-item"><div class="case-stat-val">6</div><div class="case-stat-lbl">面试机会</div></div>
+            <div class="case-stat-item"><div class="case-stat-val">2</div><div class="case-stat-lbl">Offer 数</div></div>
+            <div class="case-stat-item"><div class="case-stat-val">30%</div><div class="case-stat-lbl">薪资涨幅</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== PRICING · 收费 ===== -->
+<div class="section-wrapper">
+<div class="section-number">04</div>
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <div class="section-label reveal">Pricing</div>
+    <h2 class="section-title reveal reveal-delay-1">服务收费</h2>
+    <p class="section-desc reveal reveal-delay-2">透明定价，按需选择，不满意全额退款</p>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-name">简历精修 · 基础版</div>
+        <div class="pricing-price">¥128 <small>一次性</small></div>
+        <div class="pricing-desc">已有简历初稿，只需润色排版</div>
+        <ul class="pricing-features">
+          <li>格式排版优化</li>
+          <li>措辞润色建议</li>
+          <li>1 轮修改交付</li>
+          <li>2 个工作日内完成</li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-outline">选择方案</a>
+      </div>
+      <div class="pricing-card featured reveal reveal-delay-1">
+        <div class="pricing-popular">🔥 最受欢迎</div>
+        <div class="pricing-name">简历全流程 · 旗舰版</div>
+        <div class="pricing-price">¥228 <small>一次性</small></div>
+        <div class="pricing-desc">从零到一定制，含深度沟通</div>
+        <ul class="pricing-features">
+          <li>从零到一定制简历</li>
+          <li>求职信 + 作品集清单</li>
+          <li>JD 匹配分析报告</li>
+          <li>不限轮次修改</li>
+          <li>含语音深度沟通</li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-primary">选择方案</a>
+      </div>
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-name">求职陪跑 · 3个月</div>
+        <div class="pricing-price">¥799 <small>首付</small></div>
+        <div class="pricing-original">原价 ¥1,299</div>
+        <div class="pricing-desc">全程陪跑，offer 后按月薪 20%</div>
+        <ul class="pricing-features">
+          <li>简历优化 + 岗位推荐</li>
+          <li>面试辅导 + mock</li>
+          <li>Offer 谈判辅导</li>
+          <li>不限次 1v1 咨询</li>
+          <li>不进大厂不收费</li>
+        </ul>
+        <a href="#" class="pricing-btn pricing-btn-primary">选择方案</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="reveal">
+    <h2>别让好工作从手里溜走</h2>
+    <p>每天只有 5 个免费诊断名额，先到先得</p>
+    <a href="#hero" class="hero-cta" style="display:inline-flex">立即预约诊断</a>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer style="background:var(--gray-1);color:var(--gray-4);text-align:center;padding:1.5rem 2rem;font-size:0.82rem">
+  <p>© 2026 Alex Hu · 大学生求职辅导 · 用心帮你上岸</p>
+</footer>
+
+<script>
+// ===== Progress Bar =====
+(function(){
+  const bar = document.getElementById('progressBar');
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  };
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  window.addEventListener('resize', updateProgress, {passive:true});
+  updateProgress();
+})();
+
+// ===== Scroll Reveal =====
+(function(){
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+
+// ===== CountUp =====
+(function(){
+  const countups = document.querySelectorAll('.countup');
+  if (!countups.length) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        if (prefersReducedMotion) {
+          el.textContent = target;
+          observer.unobserve(el);
+          return;
+        }
+        animateCountUp(el, target);
+        observer.unobserve(el);
+      }
+    });
+  }, {threshold: 0.5});
+
+  countups.forEach(el => observer.observe(el));
+
+  function animateCountUp(el, target){
+    const duration = 2000;
+    const startTime = performance.now();
+    const step = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = current;
+      if(progress < 1){
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target;
+      }
+    };
+    requestAnimationFrame(step);
+  }
+})();
+
+// ===== Hero Particles =====
+(function(){
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReducedMotion) return;
+
+  const container = document.getElementById('particles');
+  if(!container) return;
+  const count = 30;
+  for(let i = 0; i < count; i++){
+    const p = document.createElement('div');
+    p.className = 'hero-particle';
+    const size = Math.random() * 6 + 2;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (Math.random() * 12 + 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    container.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>
