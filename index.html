@@ -642,7 +642,7 @@ body{
   }
 })();
 
-// ===== Hero Canvas Animation =====
+// ===== Hero Canvas Animation (Video-Grade Dynamic) =====
 (function(){
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(prefersReducedMotion) return;
@@ -650,7 +650,7 @@ body{
   const canvas = document.getElementById('heroCanvas');
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H;
+  let W, H, time = 0;
 
   function resize(){
     W = canvas.width = canvas.parentElement.offsetWidth;
@@ -659,176 +659,249 @@ body{
   resize();
   window.addEventListener('resize', resize);
 
-  // Icon types
-  const ICONS = ['resume','cap','case','envelope','arrow','star'];
-  const COLORS = [
-    'rgba(255,255,255,0.12)','rgba(148,191,255,0.15)',
-    'rgba(255,255,255,0.08)','rgba(148,191,255,0.10)',
-    'rgba(255,255,255,0.18)'
+  // ─────────── LAYER 1: Fast Glow Particles ───────────
+  const glowParticles = [];
+  const GP_COUNT = 120;
+  for(let i=0;i<GP_COUNT;i++){
+    glowParticles.push({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-0.5)*0.6, vy: -0.3 - Math.random()*1.2,
+      size: 1.5 + Math.random()*3.5,
+      life: Math.random(), lifeSpeed: 0.002 + Math.random()*0.005,
+      hue: 210 + Math.random()*30 // blue range
+    });
+  }
+
+  // ─────────── LAYER 2: Shooting Stars ───────────
+  const shootingStars = [];
+  function spawnShootingStar(){
+    shootingStars.push({
+      x: Math.random()*W, y: Math.random()*H*0.5,
+      vx: 2 + Math.random()*4, vy: 3 + Math.random()*5,
+      life: 1, decay: 0.008 + Math.random()*0.012,
+      len: 40 + Math.random()*80,
+      width: 1.5 + Math.random()*2
+    });
+  }
+  // initial bursts
+  for(let i=0;i<3;i++) setTimeout(()=>spawnShootingStar(), i*400);
+
+  // ─────────── LAYER 3: Pulse Rings ───────────
+  const pulseRings = [];
+  function spawnPulse(){
+    pulseRings.push({
+      x: Math.random()*W, y: H*0.3 + Math.random()*H*0.4,
+      radius: 0, maxRadius: 80 + Math.random()*150,
+      speed: 0.8 + Math.random()*1.2,
+      life: 1, decay: 0.005 + Math.random()*0.008,
+      width: 1 + Math.random()*2
+    });
+  }
+  for(let i=0;i<3;i++) setTimeout(()=>spawnPulse(), i*600);
+
+  // ─────────── LAYER 4: Dynamic Light Rays ───────────
+  const rays = [
+    { angle: -0.3, speed: 0.08, width: 120, opacity: 0.04 },
+    { angle: 0.5, speed: -0.05, width: 180, opacity: 0.03 },
+    { angle: -0.1, speed: 0.12, width: 90, opacity: 0.05 }
   ];
+  let rayOffset = 0;
 
-  class FloatIcon {
-    constructor(){
-      this.reset();
-      this.y = Math.random() * H; // start already on screen
+  // ─────────── LAYER 5: Floating Icons (with trails) ───────────
+  const ICONS = ['resume','cap','case','envelope','arrow','star'];
+  const ICON_COUNT = 18;
+  const iconFloats = [];
+  for(let i=0;i<ICON_COUNT;i++){
+    iconFloats.push({
+      type: ICONS[i % ICONS.length],
+      x: Math.random()*W, y: Math.random()*H,
+      size: 18 + Math.random()*28,
+      speed: 0.4 + Math.random()*1.0,
+      wobble: Math.random()*Math.PI*2,
+      wobbleSpeed: 0.008 + Math.random()*0.015,
+      wobbleAmp: 15 + Math.random()*25,
+      rotation: (Math.random()-0.5)*0.3,
+      rotSpeed: (Math.random()-0.5)*0.005,
+      opacity: 0.15 + Math.random()*0.25,
+      trail: []
+    });
+  }
+
+  // ─────────── Draw Icon Helper ───────────
+  function drawIcon(ctx, type, s, color, lineW){
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineW;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    switch(type){
+      case 'resume':
+        ctx.strokeRect(-s/2, -s*0.65, s, s*1.3);
+        for(let i=0;i<3;i++){
+          const ly = -s*0.35 + i*s*0.2;
+          ctx.beginPath(); ctx.moveTo(-s*0.35, ly); ctx.lineTo(s*0.35, ly); ctx.stroke();
+        }
+        ctx.beginPath(); ctx.moveTo(-s*0.25, -s*0.35+3*s*0.2); ctx.lineTo(s*0.2, -s*0.35+3*s*0.2); ctx.stroke();
+        break;
+      case 'cap':
+        ctx.beginPath(); ctx.moveTo(-s*0.5,-s*0.15); ctx.lineTo(0,-s*0.5); ctx.lineTo(s*0.5,-s*0.15); ctx.lineTo(0,s*0.05); ctx.closePath(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0,s*0.05); ctx.lineTo(s*0.2,s*0.35); ctx.stroke();
+        ctx.beginPath(); ctx.arc(s*0.2,s*0.35,2,0,Math.PI*2); ctx.fillStyle=color; ctx.fill();
+        break;
+      case 'case':
+        ctx.strokeRect(-s*0.4,-s*0.25,s*0.8,s*0.55);
+        ctx.beginPath(); ctx.moveTo(-s*0.15,-s*0.25); ctx.lineTo(-s*0.15,-s*0.38); ctx.lineTo(s*0.15,-s*0.38); ctx.lineTo(s*0.15,-s*0.25); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(-s*0.04,0); ctx.lineTo(s*0.04,0); ctx.stroke();
+        break;
+      case 'envelope':
+        ctx.strokeRect(-s*0.45,-s*0.3,s*0.9,s*0.6);
+        ctx.beginPath(); ctx.moveTo(-s*0.45,-s*0.3); ctx.lineTo(0,s*0.02); ctx.lineTo(s*0.45,-s*0.3); ctx.stroke();
+        break;
+      case 'arrow':
+        ctx.beginPath(); ctx.moveTo(0,s*0.4); ctx.lineTo(0,-s*0.3); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0,-s*0.3); ctx.lineTo(-s*0.25,-s*0.05); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0,-s*0.3); ctx.lineTo(s*0.25,-s*0.05); ctx.stroke();
+        break;
+      case 'star':
+        ctx.beginPath();
+        for(let i=0;i<5;i++){
+          const a=-Math.PI/2+i*2*Math.PI/5,ia=a+Math.PI/5;
+          if(i===0) ctx.moveTo(Math.cos(a)*s*0.35,Math.sin(a)*s*0.35);
+          else ctx.lineTo(Math.cos(a)*s*0.35,Math.sin(a)*s*0.35);
+          ctx.lineTo(Math.cos(ia)*s*0.15,Math.sin(ia)*s*0.15);
+        }
+        ctx.closePath(); ctx.fillStyle=color; ctx.fill(); ctx.stroke();
+        break;
     }
-    reset(){
-      this.type = ICONS[Math.floor(Math.random() * ICONS.length)];
-      this.x = Math.random() * W;
-      this.y = H + 40 + Math.random() * 60;
-      this.size = 14 + Math.random() * 22;
-      this.speed = 0.3 + Math.random() * 0.8;
-      this.wobble = Math.random() * Math.PI * 2;
-      this.wobbleSpeed = 0.01 + Math.random() * 0.02;
-      this.wobbleAmp = 10 + Math.random() * 20;
-      this.rotation = (Math.random() - 0.5) * 0.2;
-      this.opacity = 0.3 + Math.random() * 0.7;
-      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-      this.lineW = 1.2 + Math.random() * 0.8;
-    }
-    update(){
-      this.y -= this.speed;
-      this.wobble += this.wobbleSpeed;
-      this.x += Math.sin(this.wobble) * 0.3;
-      this.rotation += 0.001;
-      if(this.y < -80) this.reset();
-    }
-    draw(ctx){
+  }
+
+  // ─────────── Main Animation Loop ───────────
+  function animate(){
+    time++;
+    ctx.clearRect(0, 0, W, H);
+
+    // ── Layer: Dynamic Light Rays ──
+    rayOffset += 0.3;
+    for(const ray of rays){
       ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.rotation);
-      ctx.strokeStyle = this.color;
-      ctx.lineWidth = this.lineW;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      const s = this.size;
-      ctx.scale(1, 1);
-
-      switch(this.type){
-        // --- Resume / Document ---
-        case 'resume':
-          // paper body
-          ctx.strokeRect(-s/2, -s*0.65, s, s*1.3);
-          // text lines
-          const lineGap = s * 0.2;
-          for(let i=0;i<3;i++){
-            const ly = -s*0.35 + i * lineGap;
-            ctx.beginPath();
-            ctx.moveTo(-s*0.35, ly);
-            ctx.lineTo(s*0.35, ly);
-            ctx.stroke();
-          }
-          // shorter line
-          ctx.beginPath();
-          ctx.moveTo(-s*0.25, -s*0.35 + 3*lineGap);
-          ctx.lineTo(s*0.2, -s*0.35 + 3*lineGap);
-          ctx.stroke();
-          break;
-
-        // --- Graduation Cap ---
-        case 'cap':
-          // square top
-          ctx.beginPath();
-          ctx.moveTo(-s*0.5, -s*0.15);
-          ctx.lineTo(0, -s*0.5);
-          ctx.lineTo(s*0.5, -s*0.15);
-          ctx.lineTo(0, s*0.05);
-          ctx.closePath();
-          ctx.stroke();
-          // tassel
-          ctx.beginPath();
-          ctx.moveTo(0, s*0.05);
-          ctx.lineTo(s*0.2, s*0.35);
-          ctx.stroke();
-          // dot at tassel end
-          ctx.beginPath();
-          ctx.arc(s*0.2, s*0.35, 2, 0, Math.PI*2);
-          ctx.fillStyle = this.color;
-          ctx.fill();
-          break;
-
-        // --- Briefcase ---
-        case 'case':
-          // body
-          ctx.strokeRect(-s*0.4, -s*0.25, s*0.8, s*0.55);
-          // handle
-          ctx.beginPath();
-          ctx.moveTo(-s*0.15, -s*0.25);
-          ctx.lineTo(-s*0.15, -s*0.38);
-          ctx.lineTo(s*0.15, -s*0.38);
-          ctx.lineTo(s*0.15, -s*0.25);
-          ctx.stroke();
-          // clasp
-          ctx.beginPath();
-          ctx.moveTo(-s*0.04, 0);
-          ctx.lineTo(s*0.04, 0);
-          ctx.stroke();
-          break;
-
-        // --- Envelope / Offer Letter ---
-        case 'envelope':
-          // envelope body
-          ctx.strokeRect(-s*0.45, -s*0.3, s*0.9, s*0.6);
-          // flap
-          ctx.beginPath();
-          ctx.moveTo(-s*0.45, -s*0.3);
-          ctx.lineTo(0, s*0.02);
-          ctx.lineTo(s*0.45, -s*0.3);
-          ctx.stroke();
-          break;
-
-        // --- Upward Arrow ---
-        case 'arrow':
-          // arrow shaft
-          ctx.beginPath();
-          ctx.moveTo(0, s*0.4);
-          ctx.lineTo(0, -s*0.3);
-          ctx.stroke();
-          // arrowhead left
-          ctx.beginPath();
-          ctx.moveTo(0, -s*0.3);
-          ctx.lineTo(-s*0.25, -s*0.05);
-          ctx.stroke();
-          // arrowhead right
-          ctx.beginPath();
-          ctx.moveTo(0, -s*0.3);
-          ctx.lineTo(s*0.25, -s*0.05);
-          ctx.stroke();
-          break;
-
-        // --- Star ---
-        case 'star':
-          ctx.beginPath();
-          for(let i=0;i<5;i++){
-            const angle = -Math.PI/2 + (i*2*Math.PI/5);
-            const r = i===0 ? s*0.35 : s*0.35;
-            const innerAngle = angle + Math.PI/5;
-            if(i===0) ctx.moveTo(Math.cos(angle)*r, Math.sin(angle)*r);
-            else ctx.lineTo(Math.cos(angle)*r, Math.sin(angle)*r);
-            ctx.lineTo(Math.cos(innerAngle)*s*0.15, Math.sin(innerAngle)*s*0.15);
-          }
-          ctx.closePath();
-          ctx.fillStyle = this.color;
-          ctx.fill();
-          ctx.stroke();
-          break;
-      }
+      ctx.globalAlpha = ray.opacity;
+      const gradient = ctx.createLinearGradient(
+        W * (0.5 + Math.sin(rayOffset * ray.speed + ray.angle) * 0.5), 0,
+        W * (0.5 + Math.sin(rayOffset * ray.speed + ray.angle + 0.5) * 0.5), H
+      );
+      gradient.addColorStop(0, 'rgba(148,191,255,0)');
+      gradient.addColorStop(0.3, 'rgba(148,191,255,0.15)');
+      gradient.addColorStop(0.5, 'rgba(255,255,255,0.12)');
+      gradient.addColorStop(0.7, 'rgba(148,191,255,0.15)');
+      gradient.addColorStop(1, 'rgba(148,191,255,0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, W, H);
       ctx.restore();
     }
-  }
 
-  const icons = [];
-  const count = Math.min(Math.floor(W / 35), 35);
-  for(let i=0;i<count;i++){
-    icons.push(new FloatIcon());
-  }
-
-  function animate(){
-    ctx.clearRect(0, 0, W, H);
-    for(const icon of icons){
-      icon.update();
-      icon.draw(ctx);
+    // ── Layer: Glow Particles ──
+    for(const p of glowParticles){
+      p.x += p.vx + Math.sin(time * 0.005 + p.x * 0.01) * 0.3;
+      p.y += p.vy;
+      p.life += p.lifeSpeed;
+      if(p.life > 1 || p.y < -10 || p.x < -10 || p.x > W+10){
+        p.x = Math.random()*W; p.y = H + 5;
+        p.life = 0;
+      }
+      const alpha = Math.sin(p.life * Math.PI) * 0.6;
+      // glow effect
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
+      grad.addColorStop(0, `rgba(148,191,255,${alpha*0.3})`);
+      grad.addColorStop(0.3, `rgba(148,191,255,${alpha*0.1})`);
+      grad.addColorStop(1, `rgba(148,191,255,0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI*2); ctx.fill();
+      // core
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI*2); ctx.fill();
     }
+
+    // ── Layer: Shooting Stars ──
+    for(let i=shootingStars.length-1;i>=0;i--){
+      const s = shootingStars[i];
+      s.x += s.vx; s.y += s.vy;
+      s.life -= s.decay;
+      if(s.life <= 0 || s.x > W+100 || s.y > H+100){
+        shootingStars.splice(i,1);
+        continue;
+      }
+      ctx.save();
+      ctx.globalAlpha = s.life * 0.7;
+      const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.vx/s.vy*s.len, s.y - s.len);
+      grad.addColorStop(0, 'rgba(180,215,255,0.8)');
+      grad.addColorStop(0.3, 'rgba(148,191,255,0.3)');
+      grad.addColorStop(1, 'rgba(148,191,255,0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = s.width;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      const endX = s.x - s.vx/s.vy * s.len;
+      ctx.lineTo(endX, s.y - s.len);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // ── Layer: Pulse Rings ──
+    for(let i=pulseRings.length-1;i>=0;i--){
+      const r = pulseRings[i];
+      r.radius += r.speed;
+      r.life -= r.decay;
+      if(r.life <= 0 || r.radius > r.maxRadius){
+        pulseRings.splice(i,1);
+        continue;
+      }
+      ctx.save();
+      ctx.globalAlpha = r.life * 0.25;
+      ctx.strokeStyle = 'rgba(148,191,255,0.6)';
+      ctx.lineWidth = r.width * r.life;
+      ctx.beginPath(); ctx.arc(r.x, r.y, r.radius, 0, Math.PI*2); ctx.stroke();
+      ctx.globalAlpha = r.life * 0.08;
+      ctx.fillStyle = 'rgba(148,191,255,0.3)';
+      ctx.beginPath(); ctx.arc(r.x, r.y, r.radius, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    }
+
+    // ── Layer: Floating Icons with Trails ──
+    for(const f of iconFloats){
+      f.y -= f.speed;
+      f.wobble += f.wobbleSpeed;
+      f.x += Math.sin(f.wobble) * f.wobbleAmp * 0.008;
+      f.rotation += f.rotSpeed;
+
+      // trail
+      f.trail.push({x: f.x, y: f.y, r: f.rotation});
+      if(f.trail.length > 8) f.trail.shift();
+
+      // draw trail
+      for(let t=0;t<f.trail.length;t++){
+        const alpha = (t / f.trail.length) * f.opacity * 0.5;
+        ctx.save();
+        ctx.translate(f.trail[t].x, f.trail[t].y);
+        ctx.rotate(f.trail[t].r);
+        ctx.globalAlpha = alpha;
+        drawIcon(ctx, f.type, f.size * (0.5 + t/f.trail.length*0.5), 'rgba(148,191,255,0.2)', 0.8);
+        ctx.restore();
+      }
+
+      // main icon
+      ctx.save();
+      ctx.translate(f.x, f.y);
+      ctx.rotate(f.rotation);
+      ctx.globalAlpha = f.opacity;
+      drawIcon(ctx, f.type, f.size, 'rgba(255,255,255,0.25)', 1.2);
+      ctx.restore();
+
+      if(f.y < -80) { f.y = H+20; f.x = Math.random()*W; f.trail = []; }
+    }
+
+    // ── Spawn new effects ──
+    if(time % 120 === 0 && shootingStars.length < 5) spawnShootingStar();
+    if(time % 90 === 0 && pulseRings.length < 6) spawnPulse();
+
     requestAnimationFrame(animate);
   }
   animate();
