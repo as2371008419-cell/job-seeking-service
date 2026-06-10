@@ -292,7 +292,13 @@ body{
 }
 .about-stat-num{font-size:2rem;font-weight:800;color:var(--blue-2);line-height:1}
 .about-stat-label{font-size:0.82rem;color:var(--gray-3);margin-top:0.3rem}
-.about-photo{display:flex;justify-content:center;align-items:center;overflow:hidden}
+.about-photo{display:flex;justify-content:center;align-items:center;overflow:hidden;animation:float 5s ease-in-out infinite}
+@keyframes float{
+  0%,100%{transform:translateY(0px) translateX(0px) rotate(0deg)}
+  25%{transform:translateY(-4px) translateX(2px) rotate(0.5deg)}
+  50%{transform:translateY(-2px) translateX(-3px) rotate(-0.3deg)}
+  75%{transform:translateY(3px) translateX(1px) rotate(0.4deg)}
+}
 .about-photo img{
   width:100%;max-width:280px;height:auto;border-radius:16px;
   box-shadow:0 8px 30px rgba(0,0,0,0.12);border:4px solid var(--white);
