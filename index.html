@@ -274,61 +274,52 @@ body{
 .about-stat-label{font-size:0.82rem;color:var(--gray-3);margin-top:0.3rem}
 
 /* ===== Showcase ===== */
-.showcase-block{
-  background:var(--white);border-radius:20px;padding:2rem;
-  border:1px solid var(--gray-5);
+.showcase-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:stretch}
+@media(max-width:900px){.showcase-row{grid-template-columns:1fr}}
+.showcase-col{
+  background:var(--white);border-radius:20px;padding:1.5rem;
+  border:1px solid var(--gray-5);display:flex;flex-direction:column;
 }
-.showcase-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
-.showcase-icon{
-  width:52px;height:52px;border-radius:14px;display:flex;
-  align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;
-}
-.showcase-header h3{font-size:1.2rem;font-weight:700;color:var(--gray-1);margin-bottom:0.2rem}
-.showcase-header p{font-size:0.88rem;color:var(--gray-3)}
+.showcase-col-header{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.sc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.showcase-col-header h3{font-size:1.1rem;font-weight:700;color:var(--gray-1)}
+.showcase-col-header p{font-size:0.82rem;color:var(--gray-3);margin-top:0.1rem}
 
-/* Resume Compare */
-.resume-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:start}
-@media(max-width:768px){.resume-compare{grid-template-columns:1fr;gap:1.5rem}}
-.resume-side{padding:1rem;border-radius:12px;border:1px solid var(--gray-5)}
-.resume-before{background:#FFF5F5}
-.resume-after{background:#F0FFF4}
-.resume-label{font-size:0.85rem;font-weight:700;margin-bottom:0.6rem}
-.optimize-bad{color:#E53E3E}
-.optimize-good{color:#38A169}
-.resume-mock{padding:0.8rem;border-radius:8px;background:var(--white);border:1px solid var(--gray-5)}
-.rm-header{font-size:0.78rem;font-weight:700;color:var(--gray-2);padding-bottom:0.5rem;border-bottom:1px solid var(--gray-5);margin-bottom:0.5rem}
-.rm-section{margin-bottom:0.5rem}
-.rm-section-title{font-size:0.72rem;font-weight:600;color:var(--gray-3);margin-bottom:0.3rem}
-.rm-hl{color:var(--blue-2);font-weight:600;margin-left:0.3rem}
-.rm-line{height:5px;border-radius:3px;background:var(--gray-5);margin:4px 0}
-.rm-line-short{width:40%}
-.rm-line-mid{width:65%}
-.rm-line-long{width:85%}
-.rm-line-full{width:100%}
-.hl-line{background:#C6F6D5}
-.skill-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
-.skill-tag{font-size:0.62rem;padding:2px 6px;border-radius:4px;background:var(--blue-6);color:var(--blue-2);font-weight:600}
-.resume-flaws,.resume-gains{display:flex;flex-wrap:wrap;gap:4px;margin-top:0.6rem}
-.flaw-tag{font-size:0.7rem;color:#C53030;background:#FFF5F5;padding:2px 6px;border-radius:4px}
-.gain-tag{font-size:0.7rem;color:#276749;background:#F0FFF4;padding:2px 6px;border-radius:4px}
-.resume-vs{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0.5rem;gap:0.3rem}
-.vs-badge{
-  width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  background:var(--blue-2);color:var(--white);font-size:1.2rem;font-weight:700;
-}
-.vs-text{font-size:0.7rem;color:var(--gray-3);text-align:center;line-height:1.3}
+/* Resume Compare in Showcase */
+.sc-resume{display:grid;grid-template-columns:1fr auto 1fr;gap:0.5rem;flex:1;align-items:start}
+@media(max-width:480px){.sc-resume{grid-template-columns:1fr}}
+.sc-r-side{padding:0.6rem;border-radius:8px;display:flex;flex-direction:column}
+.sc-r-before{background:#FFF5F5}
+.sc-r-after{background:#F0FFF4}
+.sc-r-label{font-size:0.75rem;font-weight:700;margin-bottom:0.4rem}
+.sc-r-bad{color:#E53E3E}
+.sc-r-good{color:#38A169}
+.sc-r-doc{background:var(--white);border:1px solid var(--gray-5);border-radius:6px;overflow:hidden;font-family:"Courier New",monospace;font-size:0.72rem}
+.sc-r-doc-good{border-color:#C6F6D5}
+.sc-r-head{background:#F7FAFC;padding:0.25rem 0.4rem;font-weight:700;color:var(--gray-2);border-bottom:1px solid var(--gray-5);font-size:0.72rem}
+.sc-r-body{padding:0.3rem 0.4rem}
+.sc-r-field{font-weight:700;color:var(--gray-2);margin:0.2rem 0 0.05rem;font-size:0.68rem}
+.sc-r-hl{color:var(--blue-2);font-weight:600;margin-left:0.2rem}
+.sc-r-item{font-size:0.62rem;color:var(--gray-3);padding:0.05rem 0;line-height:1.35}
+.sc-num{color:var(--green);font-weight:700}
+.sc-r-skills{display:flex;flex-wrap:wrap;gap:2px;margin-top:3px}
+.sc-skill{font-size:0.58rem;padding:1px 5px;border-radius:3px;background:var(--blue-6);color:var(--blue-2);font-weight:600}
+.sc-r-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:0.4rem}
+.sc-tag-bad{font-size:0.65rem;color:#C53030;background:#FFF5F5;padding:1px 5px;border-radius:4px}
+.sc-tag-good{font-size:0.65rem;color:#276749;background:#F0FFF4;padding:1px 5px;border-radius:4px}
+.sc-r-arrow{display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:var(--blue-2)}
 
-/* Coaching Grid */
-.coaching-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-@media(max-width:768px){.coaching-grid{grid-template-columns:repeat(2,1fr)}}
-.coach-card{
-  padding:1.2rem;border-radius:12px;border:1px solid var(--gray-5);
-  transition:all 0.3s;text-align:center;
+/* Coaching in Showcase */
+.sc-coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;flex:1}
+.sc-coach-item{
+  display:flex;align-items:center;gap:0.6rem;
+  padding:0.6rem 0.7rem;border-radius:10px;border:1px solid var(--gray-5);
+  transition:all 0.2s;
 }
-.coach-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,82,217,0.08);border-color:var(--blue-4)}
-.coach-icon{font-size:1.8rem;margin-bottom:0.5rem}
-.coach-card h4{font-size:0.92rem;font-weight:700;color:var(--gray-1);margin-bottom:0.3rem}
-.coach-card p{font-size:0.8rem;color:var(--gray-3);line-height:1.5}
+.sc-coach-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,82,217,0.06);border-color:var(--blue-4)}
+.sc-coach-icon{font-size:1.3rem;width:36px;text-align:center;flex-shrink:0}
+.sc-coach-text h4{font-size:0.82rem;font-weight:700;color:var(--gray-1);margin-bottom:0.1rem}
+.sc-coach-text p{font-size:0.72rem;color:var(--gray-3);line-height:1.3}
 
 /* ===== CTA Footer ===== */
 .cta-section{
@@ -428,128 +419,121 @@ body{
     <h2 class="section-title reveal reveal-delay-1">服务展示</h2>
     <p class="section-desc reveal reveal-delay-2">看看我能帮你做什么，每个服务都看得见效果</p>
 
-    <!-- Resume Optimization Showcase -->
-    <div class="showcase-block reveal">
-      <div class="showcase-header">
-        <div class="showcase-icon" style="background:#FEF3C7;color:#D97706">📄</div>
-        <div>
-          <h3>简历优化</h3>
-          <p>从排版到内容到关键词，逐字逐句帮你打磨职场第一张名片</p>
-        </div>
-      </div>
-
-      <div class="resume-compare">
-        <!-- Before -->
-        <div class="resume-side resume-before">
-          <div class="resume-label optimize-bad">❌ 优化前</div>
-          <div class="resume-mock">
-            <div class="rm-header">👤 个人简历</div>
-            <div class="rm-section">
-              <div class="rm-section-title">工作经历</div>
-              <div class="rm-line rm-line-short"></div>
-              <div class="rm-line rm-line-mid"></div>
-              <div class="rm-line rm-line-long"></div>
-            </div>
-            <div class="rm-section">
-              <div class="rm-section-title">项目经历</div>
-              <div class="rm-line rm-line-mid"></div>
-              <div class="rm-line rm-line-short"></div>
-            </div>
-            <div class="rm-section">
-              <div class="rm-section-title">自我评价</div>
-              <div class="rm-line rm-line-long"></div>
-              <div class="rm-line rm-line-mid"></div>
-            </div>
-          </div>
-          <div class="resume-flaws">
-            <span class="flaw-tag">❌ 排版混乱</span>
-            <span class="flaw-tag">❌ 缺乏关键词</span>
-            <span class="flaw-tag">❌ 没有量化结果</span>
-            <span class="flaw-tag">❌ STAR表达缺失</span>
+    <div class="showcase-row">
+      <!-- LEFT: Resume Optimization -->
+      <div class="showcase-col showcase-col-resume reveal">
+        <div class="showcase-col-header">
+          <span class="sc-icon" style="background:#FEF3C7;color:#D97706">📄</span>
+          <div>
+            <h3>简历优化</h3>
+            <p>从排版到内容到关键词，打磨职场第一张名片</p>
           </div>
         </div>
 
-        <!-- VS -->
-        <div class="resume-vs">
-          <div class="vs-badge">→</div>
-          <div class="vs-text">优化<br>升级</div>
-        </div>
-
-        <!-- After -->
-        <div class="resume-side resume-after">
-          <div class="resume-label optimize-good">✅ 优化后</div>
-          <div class="resume-mock resume-mock-after">
-            <div class="rm-header">👤 个人简历 · 求职意向：产品运营</div>
-            <div class="rm-section">
-              <div class="rm-section-title">工作经历<span class="rm-hl">· 3年运营经验</span></div>
-              <div class="rm-line rm-line-full hl-line"></div>
-              <div class="rm-line rm-line-full hl-line"></div>
-              <div class="rm-line rm-line-long"></div>
-            </div>
-            <div class="rm-section">
-              <div class="rm-section-title">核心成果<span class="rm-hl">· 数据驱动</span></div>
-              <div class="rm-line rm-line-full hl-line"></div>
-              <div class="rm-line rm-line-full hl-line"></div>
-            </div>
-            <div class="rm-section">
-              <div class="rm-section-title">专业技能<span class="rm-hl">· 关键词匹配</span></div>
-              <div class="skill-tags">
-                <span class="skill-tag">数据分析</span>
-                <span class="skill-tag">用户增长</span>
-                <span class="skill-tag">A/B测试</span>
-                <span class="skill-tag">项目管理</span>
+        <div class="sc-resume">
+          <!-- Before -->
+          <div class="sc-r-side sc-r-before">
+            <div class="sc-r-label sc-r-bad">❌ 优化前</div>
+            <div class="sc-r-doc">
+              <div class="sc-r-head">个人简历</div>
+              <div class="sc-r-body">
+                <div class="sc-r-field">工作经历</div>
+                <div class="sc-r-item">· 负责公司运营工作</div>
+                <div class="sc-r-item">· 协助团队完成日常任务</div>
+                <div class="sc-r-field">项目经历</div>
+                <div class="sc-r-item">· 参与项目，做基础工作</div>
+                <div class="sc-r-field">自我评价</div>
+                <div class="sc-r-item">· 工作认真负责，学习能力强</div>
               </div>
             </div>
+            <div class="sc-r-tags">
+              <span class="sc-tag-bad">✗ 排版混乱</span>
+              <span class="sc-tag-bad">✗ 没有数据</span>
+              <span class="sc-tag-bad">✗ 缺乏关键词</span>
+            </div>
           </div>
-          <div class="resume-gains">
-            <span class="gain-tag">✅ STAR结构梳理</span>
-            <span class="gain-tag">✅ 关键词高亮</span>
-            <span class="gain-tag">✅ 数据量化成果</span>
-            <span class="gain-tag">✅ 排版专业统一</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Coaching Showcase -->
-    <div class="showcase-block reveal reveal-delay-1" style="margin-top:3rem">
-      <div class="showcase-header">
-        <div class="showcase-icon" style="background:#EDE9FE;color:#7C3AED">🎯</div>
-        <div>
-          <h3>求职陪跑</h3>
-          <p>从定制简历到拿到 offer，全程陪跑，每一步都有人带着你走</p>
+          <div class="sc-r-arrow">→</div>
+
+          <!-- After -->
+          <div class="sc-r-side sc-r-after">
+            <div class="sc-r-label sc-r-good">✅ 优化后</div>
+            <div class="sc-r-doc sc-r-doc-good">
+              <div class="sc-r-head">个人简历 · 目标：产品运营</div>
+              <div class="sc-r-body">
+                <div class="sc-r-field">产品运营 · XX公司 <span class="sc-r-hl">2019-2021</span></div>
+                <div class="sc-r-item">· 负责APP用户增长，<span class="sc-num">DAU提升25%</span></div>
+                <div class="sc-r-item">· 搭建分层运营体系，<span class="sc-num">留存率+18%</span></div>
+                <div class="sc-r-field">核心技能匹配</div>
+                <div class="sc-r-skills">
+                  <span class="sc-skill">数据分析</span>
+                  <span class="sc-skill">用户增长</span>
+                  <span class="sc-skill">A/B测试</span>
+                </div>
+              </div>
+            </div>
+            <div class="sc-r-tags">
+              <span class="sc-tag-good">✓ STAR结构</span>
+              <span class="sc-tag-good">✓ 数据量化</span>
+              <span class="sc-tag-good">✓ 关键词高亮</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="coaching-grid">
-        <div class="coach-card">
-          <div class="coach-icon">📝</div>
-          <h4>定制化简历</h4>
-          <p>根据目标岗位 JD，从零定制简历，突出你的核心竞争力</p>
+
+      <!-- RIGHT: Coaching -->
+      <div class="showcase-col showcase-col-coach reveal reveal-delay-1">
+        <div class="showcase-col-header">
+          <span class="sc-icon" style="background:#EDE9FE;color:#7C3AED">🎯</span>
+          <div>
+            <h3>求职陪跑</h3>
+            <p>从定制简历到拿 offer，全程有人带着你走</p>
+          </div>
         </div>
-        <div class="coach-card">
-          <div class="coach-icon">📖</div>
-          <h4>定制化面经</h4>
-          <p>针对目标公司和岗位，准备专属面试题库和应答话术</p>
-        </div>
-        <div class="coach-card">
-          <div class="coach-icon">🤝</div>
-          <h4>大厂人脉内推</h4>
-          <p>连接各大厂在职校友资源，帮你把简历递到 HR 面前</p>
-        </div>
-        <div class="coach-card">
-          <div class="coach-icon">🎤</div>
-          <h4>模拟面试</h4>
-          <p>1v1 mock + 逐题复盘，从自我介绍到压力面全流程打通</p>
-        </div>
-        <div class="coach-card">
-          <div class="coach-icon">📊</div>
-          <h4>定期复盘</h4>
-          <p>每周追踪投递数据、面试反馈，及时调整策略方向</p>
-        </div>
-        <div class="coach-card">
-          <div class="coach-icon">📋</div>
-          <h4>全程监督投递</h4>
-          <p>制定投递计划、跟进进度、督促行动，不让你漏掉任何机会</p>
+
+        <div class="sc-coach-grid">
+          <div class="sc-coach-item">
+            <div class="sc-coach-icon">📝</div>
+            <div class="sc-coach-text">
+              <h4>定制化简历</h4>
+              <p>根据目标岗位 JD 从零定制</p>
+            </div>
+          </div>
+          <div class="sc-coach-item">
+            <div class="sc-coach-icon">📖</div>
+            <div class="sc-coach-text">
+              <h4>定制化面经</h4>
+              <p>专属面试题库和应答话术</p>
+            </div>
+          </div>
+          <div class="sc-coach-item">
+            <div class="sc-coach-icon">🤝</div>
+            <div class="sc-coach-text">
+              <h4>大厂人脉内推</h4>
+              <p>在职校友直推 HR 面前</p>
+            </div>
+          </div>
+          <div class="sc-coach-item">
+            <div class="sc-coach-icon">🎤</div>
+            <div class="sc-coach-text">
+              <h4>模拟面试</h4>
+              <p>1v1 mock + 逐题复盘</p>
+            </div>
+          </div>
+          <div class="sc-coach-item">
+            <div class="sc-coach-icon">📊</div>
+            <div class="sc-coach-text">
+              <h4>定期复盘</h4>
+              <p>投递数据追踪 + 策略调整</p>
+            </div>
+          </div>
+          <div class="sc-coach-item">
+            <div class="sc-coach-icon">📋</div>
+            <div class="sc-coach-text">
+              <h4>全程监督投递</h4>
+              <p>制定计划 + 督促行动</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
