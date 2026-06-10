@@ -156,6 +156,22 @@ body{
   display:inline-block;padding:0.2rem 0.8rem;border-radius:999px;
   background:var(--blue-6);color:var(--blue-2);font-size:0.78rem;font-weight:600;
 }
+.service-features{
+  list-style:none;margin:0.8rem 0 1rem;
+}
+.service-features li{
+  position:relative;padding:0.25rem 0 0.25rem 1.2rem;
+  font-size:0.85rem;color:var(--gray-2);line-height:1.5;
+}
+.service-features li::before{
+  content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;
+}
+.service-price-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:0.8rem;border-top:1px solid var(--gray-5);
+}
+.service-price{font-size:1.1rem;font-weight:700;color:var(--blue-2)}
+.service-price small{font-size:0.78rem;font-weight:500;color:var(--gray-3);margin-left:0.3rem}
 .service-badge{
   display:inline-block;padding:0.15rem 0.6rem;border-radius:4px;
   font-size:0.78rem;font-weight:700;margin-left:0.4rem;
@@ -189,55 +205,7 @@ body{
 .case-stat-val{font-size:1.1rem;font-weight:800;color:var(--blue-2)}
 .case-stat-lbl{font-size:0.75rem;color:var(--gray-4)}
 
-/* ===== Pricing ===== */
-.pricing-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;
-  align-items:start;
-}
-.pricing-card{
-  background:var(--white);border-radius:16px;padding:2rem;
-  border:1px solid var(--gray-5);text-align:center;
-  transition:all 0.3s ease;position:relative;
-}
-.pricing-card.featured{
-  border-color:var(--blue-2);box-shadow:0 8px 30px rgba(0,82,217,0.15);
-  transform:scale(1.03);
-}
-.pricing-card.featured:hover{transform:scale(1.03) translateY(-4px)}
-.pricing-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
-.pricing-popular{
-  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
-  padding:0.25rem 1.2rem;border-radius:999px;
-  background:linear-gradient(135deg,var(--blue-2),var(--blue-3));
-  color:var(--white);font-size:0.78rem;font-weight:700;
-}
-.pricing-name{font-size:1rem;font-weight:700;color:var(--gray-2);margin-bottom:0.5rem}
-.pricing-price{
-  font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;color:var(--blue-2);
-  margin-bottom:0.3rem;
-}
-.pricing-price small{font-size:0.9rem;font-weight:600;color:var(--gray-3)}
-.pricing-original{font-size:0.85rem;color:var(--gray-4);text-decoration:line-through;margin-bottom:0.5rem}
-.pricing-desc{font-size:0.88rem;color:var(--gray-3);margin-bottom:1.2rem;line-height:1.6}
-.pricing-features{list-style:none;text-align:left;margin-bottom:1.5rem}
-.pricing-features li{
-  position:relative;padding:0.4rem 0 0.4rem 1.5rem;
-  font-size:0.88rem;color:var(--gray-2);line-height:1.5;
-}
-.pricing-features li::before{
-  content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;
-}
-.pricing-btn{
-  display:inline-block;padding:0.7rem 2rem;border-radius:999px;
-  font-weight:700;font-size:0.92rem;text-decoration:none;
-  transition:all 0.3s;
-}
-.pricing-btn-primary{background:var(--blue-2);color:var(--white)}
-.pricing-btn-primary:hover{background:var(--blue-1)}
-.pricing-btn-outline{border:2px solid var(--blue-2);color:var(--blue-2)}
-.pricing-btn-outline:hover{background:var(--blue-2);color:var(--white)}
-
-/* ===== How It Works ===== */
+/* ===== CTA Footer ===== */
 .steps{display:flex;flex-direction:column;gap:1rem;max-width:700px;margin:0 auto}
 .step{
   display:flex;gap:1.2rem;align-items:flex-start;
@@ -283,7 +251,6 @@ body{
   .pricing-card.featured{transform:none}
   .pricing-card.featured:hover{transform:translateY(-4px)}
   .section-number{display:none}
-}
 </style>
 </head>
 <body>
@@ -313,7 +280,7 @@ body{
         <div class="hero-stat-label">简历通过率提升</div>
       </div>
     </div>
-    <a href="#pricing" class="hero-cta reveal reveal-delay-4">
+    <a href="#services" class="hero-cta reveal reveal-delay-4">
       立即了解服务
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
@@ -368,37 +335,66 @@ body{
   <div class="section-inner">
     <div class="section-label reveal">Services</div>
     <h2 class="section-title reveal reveal-delay-1">我的求职服务</h2>
-    <p class="section-desc reveal reveal-delay-2">简历按需求分 2 档，陪跑从 0 到 1 全程护航</p>
+    <p class="section-desc reveal reveal-delay-2">简历按需求分 2 档，陪跑从 0 到 1 全程护航，价格一步到位</p>
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="service-icon" style="background:#FEF3C7;color:#D97706">📄</div>
         <h3>简历精修 <span class="service-badge badge-new">¥128</span></h3>
         <p>适合已经有初稿的同学。帮你优化排版、润色措辞，让简历看起来更专业。</p>
-        <span class="service-tag">1轮修改</span>
-        <span class="service-tag" style="margin-left:0.4rem">2个工作日内</span>
+        <ul class="service-features">
+          <li>格式排版优化</li>
+          <li>措辞润色建议</li>
+          <li>1 轮修改 · 2 个工作日内</li>
+        </ul>
+        <div class="service-price-row">
+          <span class="service-price">¥128 <small>一次性</small></span>
+          <a href="#" class="pricing-btn pricing-btn-outline" style="padding:0.4rem 1.2rem;font-size:0.82rem">选这个</a>
+        </div>
       </div>
       <div class="service-card reveal reveal-delay-1">
         <div class="service-icon" style="background:#D1FAE5;color:#059669">🏆</div>
-        <h3>简历定制 <span class="service-badge badge-new">¥228</span></h3>
-        <p>从零到一全流程定制简历。含岗位 JD 匹配分析、作品集清单，不限轮次修改到满意。</p>
-        <span class="service-tag">不限轮次修改</span>
-        <span class="service-tag" style="margin-left:0.4rem">含深度沟通</span>
+        <h3>简历定制 <span class="service-badge badge-popular" style="background:linear-gradient(135deg,var(--gold),#F97316);color:var(--white)">最受欢迎</span></h3>
+        <p>从零到一全流程定制，含岗位 JD 匹配分析、作品集清单，不限轮次修改到满意。</p>
+        <ul class="service-features">
+          <li>从零到一定制简历</li>
+          <li>求职信 + 作品集清单</li>
+          <li>岗位 JD 匹配分析</li>
+          <li>不限轮次修改 · 含深度沟通</li>
+        </ul>
+        <div class="service-price-row">
+          <span class="service-price">¥228 <small>一次性</small></span>
+          <a href="#" class="pricing-btn pricing-btn-primary" style="padding:0.4rem 1.2rem;font-size:0.82rem">选这个</a>
+        </div>
       </div>
       <div class="service-card reveal reveal-delay-2">
         <div class="service-icon" style="background:#FFF3E0;color:#E65100">🎯</div>
         <h3>实习陪跑 <span class="service-badge badge-new">¥499</span></h3>
-        <p>在校生从 0 到实习 offer 的全流程陪跑。定制简历 + 面经 + 大厂内推 + 模拟面试 + 定期复盘 + 全程监督投递，一站式搞定。</p>
-        <span class="service-tag">定制化简历</span>
-        <span class="service-tag" style="margin-left:0.4rem">大厂人脉内推</span>
-        <span class="service-tag" style="margin-left:0.4rem">全程监督投递</span>
+        <p>在校生从 0 到实习 offer 的全流程陪跑，一站式搞定。</p>
+        <ul class="service-features">
+          <li>定制化简历 + 定制化面经</li>
+          <li>大厂人脉内推</li>
+          <li>模拟面试 + 定期复盘</li>
+          <li>全程监督投递</li>
+        </ul>
+        <div class="service-price-row">
+          <span class="service-price">¥499 <small>拿到实习为止</small></span>
+          <a href="#" class="pricing-btn pricing-btn-primary" style="padding:0.4rem 1.2rem;font-size:0.82rem">选这个</a>
+        </div>
       </div>
       <div class="service-card reveal reveal-delay-1">
         <div class="service-icon" style="background:#FCE4EC;color:#C62828">💫</div>
-        <h3>转岗陪跑 <span class="service-badge badge-popular">¥599+30%</span></h3>
-        <p>想换赛道/转行从 0 到上岸。定制简历 + 面经 + 内推 + 模拟面试 + 全程复盘监督 + offer谈判，成功转岗后付 30% offer 薪资。</p>
-        <span class="service-tag">定制化面经</span>
-        <span class="service-tag" style="margin-left:0.4rem">定期复盘数据</span>
-        <span class="service-tag" style="margin-left:0.4rem">按结果付费</span>
+        <h3>转岗陪跑 <span class="service-badge badge-new">¥599+30%</span></h3>
+        <p>想换赛道/转行从 0 到上岸，成功转岗后付 30% offer 薪资。</p>
+        <ul class="service-features">
+          <li>定制化简历 + 定制化面经</li>
+          <li>大厂人脉内推</li>
+          <li>模拟面试 + 定期复盘</li>
+          <li>全程监督投递 + 不成功不收费</li>
+        </ul>
+        <div class="service-price-row">
+          <span class="service-price">¥599 <small>+ 30% offer薪资</small></span>
+          <a href="#" class="pricing-btn pricing-btn-primary" style="padding:0.4rem 1.2rem;font-size:0.82rem">选这个</a>
+        </div>
       </div>
     </div>
   </div>
@@ -497,73 +493,6 @@ body{
             <div class="case-stat-item"><div class="case-stat-val">30%</div><div class="case-stat-lbl">薪资涨幅</div></div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<!-- ===== PRICING · 收费 ===== -->
-<div class="section-wrapper">
-<div class="section-number">04</div>
-<section class="section" id="pricing">
-  <div class="section-inner">
-    <div class="section-label reveal">Pricing</div>
-    <h2 class="section-title reveal reveal-delay-1">服务收费</h2>
-    <p class="section-desc reveal reveal-delay-2">透明定价，按需选择，不满意全额退款</p>
-    <div class="pricing-grid">
-      <div class="pricing-card reveal">
-        <div class="pricing-name">📄 简历精修</div>
-        <div class="pricing-price">¥128 <small>一次性</small></div>
-        <div class="pricing-desc">有初稿，只需润色排版</div>
-        <ul class="pricing-features">
-          <li>格式排版优化</li>
-          <li>措辞润色建议</li>
-          <li>1 轮修改交付</li>
-          <li>2 个工作日内完成</li>
-        </ul>
-        <a href="#" class="pricing-btn pricing-btn-outline">选这个</a>
-      </div>
-      <div class="pricing-card featured reveal reveal-delay-1">
-        <div class="pricing-popular">🔥 最受欢迎</div>
-        <div class="pricing-name">🏆 简历定制</div>
-        <div class="pricing-price">¥228 <small>一次性</small></div>
-        <div class="pricing-desc">从零到一定制，含岗位匹配</div>
-        <ul class="pricing-features">
-          <li>从零到一定制简历</li>
-          <li>求职信 + 作品集清单</li>
-          <li>岗位 JD 匹配分析</li>
-          <li>不限轮次修改</li>
-          <li>含语音深度沟通</li>
-        </ul>
-        <a href="#" class="pricing-btn pricing-btn-primary">选这个</a>
-      </div>
-      <div class="pricing-card reveal reveal-delay-2">
-        <div class="pricing-name">🎯 实习陪跑</div>
-        <div class="pricing-price">¥499 <small>拿到实习为止</small></div>
-        <div class="pricing-desc">从 0 到实习 offer 全程陪跑</div>
-        <ul class="pricing-features">
-          <li>定制化简历</li>
-          <li>定制化面经</li>
-          <li>大厂人脉内推</li>
-          <li>模拟面试 + 复盘</li>
-          <li>全程监督投递</li>
-        </ul>
-        <a href="#" class="pricing-btn pricing-btn-primary">选这个</a>
-      </div>
-      <div class="pricing-card reveal">
-        <div class="pricing-name">💫 转岗陪跑</div>
-        <div class="pricing-price">¥599 <small>+ 30% offer薪资</small></div>
-        <div class="pricing-desc">换赛道转岗，按结果付费</div>
-        <ul class="pricing-features">
-          <li>定制化简历</li>
-          <li>定制化面经</li>
-          <li>大厂人脉内推</li>
-          <li>模拟面试 + 定期复盘</li>
-          <li>全程监督投递</li>
-          <li>不转成功不收费</li>
-        </ul>
-        <a href="#" class="pricing-btn pricing-btn-primary">选这个</a>
       </div>
     </div>
   </div>
