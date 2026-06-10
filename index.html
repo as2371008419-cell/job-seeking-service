@@ -205,6 +205,43 @@ body{
 .case-stat-val{font-size:1.1rem;font-weight:800;color:var(--blue-2)}
 .case-stat-lbl{font-size:0.75rem;color:var(--gray-4)}
 
+/* ===== Cases Categories ===== */
+.cases-category{}
+.cases-cat-header{display:flex;align-items:center;gap:0.6rem;margin-bottom:1.2rem}
+.cases-cat-icon{font-size:1.3rem}
+.cases-cat-header h3{font-size:1.1rem;font-weight:700;color:var(--gray-1)}
+.cases-cat-badge{
+  font-size:0.72rem;padding:0.15rem 0.7rem;border-radius:999px;
+  background:var(--blue-6);color:var(--blue-2);font-weight:600;
+}
+.rcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:768px){.rcase-grid{grid-template-columns:1fr}}
+.rcase-card{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--gray-5);transition:all 0.3s}
+.rcase-card:hover{box-shadow:0 8px 24px rgba(0,82,217,0.08)}
+.rcase-info{padding:1rem 1.2rem 0.5rem}
+.rcase-student{font-size:0.95rem;font-weight:700;color:var(--gray-1);margin-bottom:0.2rem}
+.rcase-target{font-size:0.8rem;color:var(--gray-3);margin-bottom:0.5rem}
+.rcase-result-row{display:flex;gap:0.6rem;flex-wrap:wrap}
+.rcase-result{font-size:0.75rem;padding:0.15rem 0.6rem;border-radius:999px;background:#D1FAE5;color:#065F46;font-weight:600}
+.rcase-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:0.5rem;padding:0 1.2rem 1rem;align-items:start}
+@media(max-width:768px){.rcase-compare{grid-template-columns:1fr;gap:0.8rem}}
+.rcase-side{padding:0.5rem;border-radius:8px}
+.rcase-before{background:#FFF5F5}
+.rcase-after{background:#F0FFF4}
+.rcase-label{font-size:0.72rem;font-weight:700;color:#E53E3E;margin-bottom:0.4rem}
+.rcase-label-good{color:#38A169}
+.rcase-vs{display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:var(--blue-2);padding-top:2rem}
+.rcase-doc{background:var(--white);border:1px solid var(--gray-5);border-radius:6px;overflow:hidden;font-family:"Courier New",monospace}
+.rcase-doc-good{border-color:#C6F6D5}
+.rdoc-header{background:var(--gray-6);padding:0.3rem 0.5rem;font-size:0.68rem;font-weight:700;color:var(--gray-2);border-bottom:1px solid var(--gray-5)}
+.rdoc-body{padding:0.4rem 0.5rem}
+.rdoc-field{font-size:0.68rem;font-weight:600;color:var(--gray-2);margin:0.3rem 0 0.1rem}
+.rdoc-val{font-weight:400;color:var(--gray-3);margin-left:0.3rem}
+.rdoc-hl{color:var(--blue-2)}
+.rdoc-line{font-size:0.62rem;color:var(--gray-3);padding:0.08rem 0;line-height:1.4}
+.rdoc-num{color:var(--green);font-weight:700}
+.rdoc-tag{font-size:0.55rem;padding:1px 4px;border-radius:3px;background:var(--blue-6);color:var(--blue-2);font-weight:600;margin:0 1px}
+
 /* ===== CTA Footer ===== */
 .steps{display:flex;flex-direction:column;gap:1rem;max-width:700px;margin:0 auto}
 .step{
@@ -528,46 +565,142 @@ body{
     <div class="section-label reveal">Success Stories</div>
     <h2 class="section-title reveal reveal-delay-1">成功案例</h2>
     <p class="section-desc reveal reveal-delay-2">看看学长学姐们如何用我们的服务拿到心仪 offer</p>
-    <div class="cases-grid">
-      <div class="case-card reveal">
-        <div class="case-card-header">
-          <h3>🧑‍🎓 小陈 · 某双非本科</h3>
-          <span class="case-result">✅ 月薪 12K 入职</span>
+
+    <!-- Resume Cases -->
+    <div class="cases-category reveal">
+      <div class="cases-cat-header">
+        <span class="cases-cat-icon">📄</span>
+        <h3>简历优化案例</h3>
+        <span class="cases-cat-badge">改前 vs 改后</span>
+      </div>
+
+      <div class="rcase-grid">
+        <!-- Resume Case 1 -->
+        <div class="rcase-card">
+          <div class="rcase-info">
+            <div class="rcase-student">🧑‍🎓 小陈 · 某双非本科</div>
+            <div class="rcase-target">目标：互联网产品运营</div>
+            <div class="rcase-result-row">
+              <span class="rcase-result">投递回复率提升 4 倍</span>
+              <span class="rcase-result">3 个 offer</span>
+            </div>
+          </div>
+          <div class="rcase-compare">
+            <div class="rcase-side rcase-before">
+              <div class="rcase-label">优化前</div>
+              <div class="rcase-doc">
+                <div class="rdoc-header">个人简历</div>
+                <div class="rdoc-body">
+                  <div class="rdoc-field"><span class="rdoc-label">工作经历</span><span class="rdoc-val">2019-2021 XX公司 运营</span></div>
+                  <div class="rdoc-line">· 负责公司运营工作，协助团队完成日常任务</div>
+                  <div class="rdoc-line">· 参与项目，做一些基础工作</div>
+                  <div class="rdoc-field"><span class="rdoc-label">教育经历</span><span class="rdoc-val">双非本科 计算机专业</span></div>
+                  <div class="rdoc-line" style="color:#ccc">-</div>
+                </div>
+              </div>
+            </div>
+            <div class="rcase-vs">→</div>
+            <div class="rcase-side rcase-after">
+              <div class="rcase-label rcase-label-good">优化后</div>
+              <div class="rcase-doc rcase-doc-good">
+                <div class="rdoc-header">个人简历 · 求职意向：产品运营</div>
+                <div class="rdoc-body">
+                  <div class="rdoc-field"><span class="rdoc-label">产品运营 · XX公司</span><span class="rdoc-val rdoc-hl">2019-2021</span></div>
+                  <div class="rdoc-line">· 负责APP用户增长策略，3个月DAU提升<span class="rdoc-num">25%</span></div>
+                  <div class="rdoc-line">· 搭建用户分层运营体系，留存率提升<span class="rdoc-num">18%</span></div>
+                  <div class="rdoc-line">· 主导A/B测试12次，转化率优化<span class="rdoc-num">32%</span></div>
+                  <div class="rdoc-field"><span class="rdoc-label">核心技能</span>
+                    <span class="rdoc-tag">数据分析</span>
+                    <span class="rdoc-tag">用户增长</span>
+                    <span class="rdoc-tag">A/B测试</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="case-card-body">
-          <p class="case-detail">计算机专业，求职互联网产品运营。通过 3 个月陪跑服务，从简历一片空白到斩获 3 个 offer，最终入职某一线互联网公司产品运营岗。</p>
-          <div class="case-stats">
-            <div class="case-stat-item"><div class="case-stat-val">4</div><div class="case-stat-lbl">面试机会</div></div>
-            <div class="case-stat-item"><div class="case-stat-val">3</div><div class="case-stat-lbl">Offer 数</div></div>
-            <div class="case-stat-item"><div class="case-stat-val">60%</div><div class="case-stat-lbl">薪资涨幅</div></div>
+
+        <!-- Resume Case 2 -->
+        <div class="rcase-card reveal reveal-delay-1">
+          <div class="rcase-info">
+            <div class="rcase-student">🧑‍🎓 小张 · 某 211 本科</div>
+            <div class="rcase-target">目标：快消/电商品牌运营</div>
+            <div class="rcase-result-row">
+              <span class="rcase-result">投递回复率提升 3 倍</span>
+              <span class="rcase-result">2 个 offer</span>
+            </div>
+          </div>
+          <div class="rcase-compare">
+            <div class="rcase-side rcase-before">
+              <div class="rcase-label">优化前</div>
+              <div class="rcase-doc">
+                <div class="rdoc-header">简历</div>
+                <div class="rdoc-body">
+                  <div class="rdoc-field"><span class="rdoc-label">工作经历</span><span class="rdoc-val">XX公司 市场专员</span></div>
+                  <div class="rdoc-line">· 负责市场活动的组织和执行</div>
+                  <div class="rdoc-line">· 协助完成部门安排的各项工作</div>
+                  <div class="rdoc-field"><span class="rdoc-label">教育经历</span><span class="rdoc-val">211本科 市场营销</span></div>
+                  <div class="rdoc-line">· 英语六级</div>
+                </div>
+              </div>
+            </div>
+            <div class="rcase-vs">→</div>
+            <div class="rcase-side rcase-after">
+              <div class="rcase-label rcase-label-good">优化后</div>
+              <div class="rcase-doc rcase-doc-good">
+                <div class="rdoc-header">简历 · 目标岗位：品牌运营</div>
+                <div class="rdoc-body">
+                  <div class="rdoc-field"><span class="rdoc-label">品牌运营 · XX公司</span><span class="rdoc-val rdoc-hl">2020-2022</span></div>
+                  <div class="rdoc-line">· 策划12场品牌营销活动，场均曝光<span class="rdoc-num">50万+</span></div>
+                  <div class="rdoc-line">· 运营小红书/抖音账号，3个月涨粉<span class="rdoc-num">2万+</span></div>
+                  <div class="rdoc-line">· 搭建KOL合作矩阵，ROI达<span class="rdoc-num">1:4.5</span></div>
+                  <div class="rdoc-field"><span class="rdoc-label">核心技能</span>
+                    <span class="rdoc-tag">内容营销</span>
+                    <span class="rdoc-tag">KOL管理</span>
+                    <span class="rdoc-tag">数据分析</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="case-card reveal reveal-delay-1">
-        <div class="case-card-header">
-          <h3>🧑‍🎓 小张 · 某 211 本科</h3>
-          <span class="case-result">✅ 月薪 15K 入职</span>
-        </div>
-        <div class="case-card-body">
-          <p class="case-detail">市场营销专业，目标快消 / 电商行业。简历优化后投递回复率提升 3 倍，经过 8 轮面试辅导，最终拿下某头部跨境电商品牌运营 offer。</p>
-          <div class="case-stats">
-            <div class="case-stat-item"><div class="case-stat-val">12</div><div class="case-stat-lbl">投递回复</div></div>
-            <div class="case-stat-item"><div class="case-stat-val">5</div><div class="case-stat-lbl">面试机会</div></div>
-            <div class="case-stat-item"><div class="case-stat-val">2</div><div class="case-stat-lbl">Offer 数</div></div>
+    </div>
+
+    <!-- Coaching Cases -->
+    <div class="cases-category reveal reveal-delay-1" style="margin-top:2.5rem">
+      <div class="cases-cat-header">
+        <span class="cases-cat-icon">🎯</span>
+        <h3>求职陪跑案例</h3>
+        <span class="cases-cat-badge">全程陪跑上岸</span>
+      </div>
+      <div class="cases-grid">
+        <div class="case-card reveal reveal-delay-1">
+          <div class="case-card-header">
+            <h3>🧑‍🎓 小张 · 某 211 本科</h3>
+            <span class="case-result">✅ 月薪 15K 入职</span>
+          </div>
+          <div class="case-card-body">
+            <p class="case-detail">市场营销专业，目标快消 / 电商行业。简历优化后投递回复率提升 3 倍，经过 8 轮面试辅导，最终拿下某头部跨境电商品牌运营 offer。</p>
+            <div class="case-stats">
+              <div class="case-stat-item"><div class="case-stat-val">12</div><div class="case-stat-lbl">投递回复</div></div>
+              <div class="case-stat-item"><div class="case-stat-val">5</div><div class="case-stat-lbl">面试机会</div></div>
+              <div class="case-stat-item"><div class="case-stat-val">2</div><div class="case-stat-lbl">Offer 数</div></div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="case-card reveal reveal-delay-2">
-        <div class="case-card-header">
-          <h3>👩‍🎓 小李 · 普通二本</h3>
-          <span class="case-result">✅ 月薪 9K 入职</span>
-        </div>
-        <div class="case-card-body">
-          <p class="case-detail">英语专业跨行求职，零运营经验。通过深度简历优化挖掘过往项目亮点，配合面试话术训练，2 个月内拿到互联网公司社群运营岗 offer。</p>
-          <div class="case-stats">
-            <div class="case-stat-item"><div class="case-stat-val">6</div><div class="case-stat-lbl">面试机会</div></div>
-            <div class="case-stat-item"><div class="case-stat-val">2</div><div class="case-stat-lbl">Offer 数</div></div>
-            <div class="case-stat-item"><div class="case-stat-val">30%</div><div class="case-stat-lbl">薪资涨幅</div></div>
+        <div class="case-card reveal reveal-delay-2">
+          <div class="case-card-header">
+            <h3>👩‍🎓 小李 · 普通二本</h3>
+            <span class="case-result">✅ 月薪 9K 入职</span>
+          </div>
+          <div class="case-card-body">
+            <p class="case-detail">英语专业跨行求职，零运营经验。通过深度简历优化挖掘过往项目亮点，配合面试话术训练，2 个月内拿到互联网公司社群运营岗 offer。</p>
+            <div class="case-stats">
+              <div class="case-stat-item"><div class="case-stat-val">6</div><div class="case-stat-lbl">面试机会</div></div>
+              <div class="case-stat-item"><div class="case-stat-val">2</div><div class="case-stat-lbl">Offer 数</div></div>
+              <div class="case-stat-item"><div class="case-stat-val">30%</div><div class="case-stat-lbl">薪资涨幅</div></div>
+            </div>
           </div>
         </div>
       </div>
