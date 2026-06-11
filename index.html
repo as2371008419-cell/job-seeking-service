@@ -1,594 +1,171 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大学生求职服务 · Alex</title>
+<title>胡八道 · 大学生求职辅导</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAClUlEQVR4nO2aQU7DMBBF06piywq4AFElDsCWC3AIJA7BGTgEEofgAmw5AJI1XICyYsumqFIrVVUTp87YmT/+b1vVcf6bsZ20TUMIIYQQQgghhBBCCAjh6WzdADNvHIQfgCVAC/AArIBwUPWoXQArwAuQAkJHtSN2AaQAT8AJCJEqR+sCKAEBLFx3AjyKghEQgEJ1KcCrMAgBASRMlwLCiPARxJkX4B3TAoJCBVvvAtMCasCsgKBYuZa7wKyAWjApIGSoWKtdYFLA8vlvhjCmWwE1YVbAUrFirVa/aQHWg6tCQA0S554DXBoPH0IASpCQAtrHn/XU0nLOYQiTVNaxm5aXi9nQh6nb1+ujn388fA0WkDoHbYpecEi1SU8IGwFd4e9L6At/7By0KXKhlDaXgxDOr25OGuP3+3M2dh4lRGS9gMb6KtsQxggYO4+cItQHzrGprd7uetf8rmXp8v5deyrqMtQGy3WaWEXC31FSgqaIxdgBpj7GTcXuvseKSBZQa/DaIuYpF7QQ/u3ekhM7mpYgNZfk9iklYdWxBwwl1x5wSGoHLDQuaKEjpkBjI1Y9UpU+CcWwfgLakO0BQ0uGjHwQ056HNtkftVMDEOVXEVrz0KbYS6ehAUjkhmMiNstO3xha86jydXS7/V7XnrC/5sfGq/J19LEQZOBN53qTecoccgDxU19rdP2u5jfhVBCeT8wLaAFCdCugVQjfukDTAmrAtABR2EStb8SmBdSAeQFivILdC/Auz7UABCAECEAluxbgWRqMAAEJ1K0Ar7gUIEDdAiVAgIJ1KcCjJHcC0IATIGAV7k6ANzmQAgQwaFcCPOFGgIB2BawAAQ3cjQBihNb4vx5isAMIIYQQQgghhBBCCGnK8A+fXyYu2/fziQAAAABJRU5ErkJggg==">
+<meta name="description" content="大学生求职辅导 · 从简历到 offer，一站式帮你搞定">
 <style>
-/* ===== CSS Reset & Base ===== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --blue-1:#003A9B; --blue-2:#0052D9; --blue-3:#4A8CFF;
-  --blue-4:#94BFFF; --blue-5:#D9E8FF; --blue-6:#E0ECFF;
-  --blue-7:#F0F5FF; --gray-1:#1A1A2E; --gray-2:#2D2D44;
-  --gray-3:#6B7280; --gray-4:#9CA3AF; --gray-5:#E5E7EB;
-  --gray-6:#F3F4F6; --white:#FFFFFF; --gold:#F59E0B; --gold-2:#D4A843; --gold-1:#B8860B; --gold-3:#FDE68A; --warm-1:#FFFDF5; --warm-2:#FFFAF0; --warm-3:#FEF3C7; --silver:#C0C0C0; --dark-1:#0D0D0D; --dark-2:#1A1A1A; --dark-3:#2A2A2A;
-  --green:#10B981; --red:#EF4444;
-  --section-num-size:clamp(4rem,8vw,8rem);
-  --section-pad:clamp(4rem,8vw,8rem);
-  --max-w:1200px;
-}
+:root{--bg:#FFFFFF;--bg2:#F7F6F3;--text:#37352F;--text2:#9B9A97;--text3:#0F0F0F;--border:#E9E9E7;--blue:#2383E2;--blue2:#0B6E99;--blue3:#EBF5FF;--green:#0F7B6C;--max-w:960px}
 html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
-  background:var(--white);color:var(--gray-1);line-height:1.7;overflow-x:hidden;
-}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+.progress{position:fixed;top:0;left:0;width:0;height:2px;background:var(--blue);z-index:1000;transition:width .3s}
 
-/* ===== prefers-reduced-motion ===== */
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
-  .reveal,.reveal-right{opacity:1!important;transform:none!important}
-  .hero-canvas{display:none!important}
-  .countup-num{opacity:1!important}
-}
-
-/* ===== Progress Bar ===== */
-.progress-bar{
-  position:fixed;top:0;left:0;width:0;height:3px;
-  background:linear-gradient(90deg,var(--gold-2),var(--silver));
-  z-index:1001;transition:width 0.3s ease;
-}
-
-/* ===== Sticky Section Numbers ===== */
-.section-wrapper{position:relative}
-.section-number{
-  position:sticky;top:2rem;z-index:1;
-  font-size:var(--section-num-size);font-weight:900;
-  color:rgba(212,168,67,0.15);line-height:1;user-select:none;
-  pointer-events:none;opacity:0.7;
-}
-
-/* ===== Hero ===== */
-.hero{
-  position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(160deg,var(--dark-1) 0%,var(--dark-2) 30%,#1A1210 60%,var(--dark-1) 100%);
-  overflow:hidden;padding:2rem;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 20% 30%,rgba(212,168,67,0.08) 0%,transparent 50%),
-    radial-gradient(ellipse at 80% 70%,rgba(192,192,192,0.06) 0%,transparent 50%);
-  pointer-events:none;
-}
-.hero-canvas{
-  position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
-  opacity:0.4;
-}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse at 50% 0%,rgba(212,168,67,0.12) 0%,transparent 50%),
-    radial-gradient(ellipse at 50% 100%,rgba(192,192,192,0.08) 0%,transparent 40%);
-  pointer-events:none;
-}
-.hero-content{
-  position:relative;z-index:2;text-align:center;max-width:800px;
-}
-.hero-badge{
-  display:inline-block;padding:0.4rem 1.5rem;border-radius:999px;
-  background:linear-gradient(135deg,rgba(212,168,67,0.15),rgba(192,192,192,0.1));
-  color:var(--gold-2);font-size:0.82rem;letter-spacing:0.05em;margin-bottom:1.5rem;
-  backdrop-filter:blur(4px);border:1px solid rgba(212,168,67,0.25);
-}
-.hero h1{
-  font-size:clamp(2.2rem,5vw,4rem);font-weight:800;color:var(--white);
-  line-height:1.2;margin-bottom:1rem;
-}
-.hero h1 span{background:linear-gradient(135deg,var(--gold-2),var(--silver),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{
-  font-size:clamp(1rem,2vw,1.2rem);color:rgba(192,192,192,0.8);margin-bottom:2.5rem;line-height:1.8;
-}
-.hero-stats{
-  display:flex;justify-content:center;gap:clamp(1.5rem,4vw,4rem);flex-wrap:wrap;
-}
-.hero-stat{text-align:center}
-.hero-stat-num{
-  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;
-  background:linear-gradient(135deg,var(--gold-2),var(--silver));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1;
-}
-.hero-stat-label{font-size:0.85rem;color:rgba(192,192,192,0.7);margin-top:0.3rem}
-.hero-cta{
-  margin-top:2.5rem;display:inline-flex;align-items:center;gap:0.6rem;
-  padding:0.9rem 2.5rem;border-radius:999px;
-  background:linear-gradient(135deg,var(--gold-2),var(--silver));
-  color:var(--dark-1);font-weight:800;font-size:1.05rem;
-  text-decoration:none;transition:all 0.3s ease;box-shadow:0 4px 25px rgba(212,168,67,0.3);
-}
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(212,168,67,0.4)}
-.hero-cta svg{width:20px;height:20px;transition:transform 0.3s}
-.hero-cta:hover svg{transform:translateX(4px)}
-.hero-scroll-hint{
-  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:0.3rem;
-  color:rgba(212,168,67,0.6);font-size:0.75rem;animation:bounceDown 2s infinite;
-  cursor:pointer;z-index:2;background:none;border:none;
-}
-@keyframes bounceDown{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
-.hero-scroll-hint svg{width:24px;height:24px;}
-
-/* ===== Section Common ===== */
-.section{padding:var(--section-pad) 2rem;position:relative;overflow:hidden}
-.section-inner{max-width:var(--max-w);margin:0 auto;position:relative;z-index:2}
-.section-label{
-  display:inline-flex;align-items:center;gap:0.5rem;
-  font-size:0.85rem;font-weight:600;color:var(--gold-2);text-transform:uppercase;
-  letter-spacing:0.1em;margin-bottom:0.8rem;
-}
-.section-label::before{content:'';width:24px;height:2px;background:var(--gold-2)}
-.section-title{
-  font-size:clamp(1.6rem,3vw,2.5rem);font-weight:800;color:var(--gray-1);
-  margin-bottom:1rem;line-height:1.3;
-}
-.section-desc{font-size:1.05rem;color:var(--gray-3);max-width:640px;margin-bottom:3rem;line-height:1.8}
-.section-alt{background:var(--warm-2)}
-.section-dark{background:var(--gray-1);color:var(--white)}
-.section-dark .section-title{color:var(--white)}
-.section-dark .section-desc{color:var(--gray-4)}
-.section-dark .section-number{color:rgba(255,255,255,0.06)}
-
-/* ===== Reveal Animations ===== */
-.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.22,1,0.36,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:0.1s}
-.reveal-delay-2{transition-delay:0.2s}
-.reveal-delay-3{transition-delay:0.3s}
-.reveal-delay-4{transition-delay:0.4s}
-
-/* ===== Services Grid ===== */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.service-card{
-  background:var(--white);border-radius:16px;padding:2rem;
-  border:1px solid var(--gray-5);transition:all 0.3s ease;
-  position:relative;overflow:hidden;
-}
-.service-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,var(--gold-2),var(--silver));
-}
-.notion-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(212,168,67,0.12);border-color:var(--gold-3)}
-.nc-icon{
-  width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;margin-bottom:1rem;
-}
-.service-card h3{font-size:1.2rem;font-weight:700;margin-bottom:0.6rem;color:var(--gray-1)}
-.service-card p{font-size:0.92rem;color:var(--gray-3);line-height:1.7;margin-bottom:1rem}
-.service-tag{
-  display:inline-block;padding:0.2rem 0.8rem;border-radius:999px;
-  background:var(--warm-3);color:var(--gold-1);font-size:0.78rem;font-weight:600;
-}
-.service-features{
-  list-style:none;margin:0.8rem 0 1rem;
-}
-.service-features li{
-  position:relative;padding:0.25rem 0 0.25rem 1.2rem;
-  font-size:0.85rem;color:var(--gray-2);line-height:1.5;
-}
-.service-features li::before{
-  content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;
-}
-.service-price-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding-top:0.8rem;border-top:1px solid var(--gray-5);
-}
-.service-price{font-size:1.1rem;font-weight:700;color:var(--gold-1)}
-.service-price small{font-size:0.78rem;font-weight:500;color:var(--gray-3);margin-left:0.3rem}
-.service-badge{
-  display:inline-block;padding:0.15rem 0.6rem;border-radius:4px;
-  font-size:0.78rem;font-weight:700;margin-left:0.4rem;
-}
-.badge-popular{background:linear-gradient(135deg,var(--gold),#F97316);color:var(--white)}
-.badge-new{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:var(--white)}
-
-/* ===== Case Cards ===== */
-.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-.case-card{
-  background:var(--white);border-radius:16px;overflow:hidden;
-  border:1px solid var(--gray-5);transition:all 0.3s ease;
-}
-.case-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(212,168,67,0.12)}
-.case-card-header{
-  padding:1.5rem 1.5rem 0;display:flex;justify-content:space-between;align-items:flex-start;
-}
-.case-card-header h3{font-size:1.1rem;font-weight:700;color:var(--gray-1)}
-.case-result{
-  display:inline-flex;align-items:center;gap:0.3rem;
-  padding:0.25rem 0.8rem;border-radius:999px;
-  background:#D1FAE5;color:#065F46;font-size:0.78rem;font-weight:700;
-  white-space:nowrap;
-}
-.case-card-body{padding:0.5rem 1.5rem 1.5rem}
-.case-detail{font-size:0.92rem;color:var(--gray-3);line-height:1.7}
-.case-stats{
-  display:flex;gap:1.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--gray-5);
-}
-.case-stat-item{text-align:center}
-.case-stat-val{font-size:1.1rem;font-weight:800;color:var(--gold-2)}
-.case-stat-lbl{font-size:0.75rem;color:var(--gray-4)}
-
-/* ===== Resume Cases ===== */
-.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-@media(max-width:768px){.case-grid{grid-template-columns:1fr}}
-.rcase-card{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--gray-5);transition:all 0.3s}
-.rcase-card:hover{box-shadow:0 8px 24px rgba(212,168,67,0.1)}
-.rcase-info{padding:1rem 1.2rem 0.5rem}
-.rcase-student{font-size:0.95rem;font-weight:700;color:var(--gray-1);margin-bottom:0.15rem}
-.rcase-meta{font-size:0.8rem;color:var(--gray-3);margin-bottom:0.4rem}
-.rcase-badges{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.5rem}
-.rcase-badge{font-size:0.72rem;padding:0.15rem 0.6rem;border-radius:999px;background:#D1FAE5;color:#065F46;font-weight:600}
-.rcase-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:0.4rem;padding:0 1.2rem 0.8rem;align-items:start}
-@media(max-width:768px){.rcase-compare{grid-template-columns:1fr;gap:0.6rem}}
-.rcase-side{padding:0.5rem;border-radius:8px;display:flex;flex-direction:column}
-.rcase-before{background:#FFF5F5}
-.rcase-after{background:#F0FFF4}
-.rcase-label{font-size:0.72rem;font-weight:700;margin-bottom:0.3rem}
-.rcase-label.rcase-before{color:#E53E3E}
-.rcase-label.rcase-after{color:#38A169}
-.rcase-vs{display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:var(--gold-2)}
-.rcase-doc{background:var(--white);border:1px solid var(--gray-5);border-radius:6px;overflow:hidden;font-family:"Courier New",monospace;font-size:0.7rem}
-.rcase-doc-good{border-color:#C6F6D5}
-.rdoc-header{background:#F7FAFC;padding:0.2rem 0.4rem;font-weight:700;color:var(--gray-2);border-bottom:1px solid var(--gray-5);font-size:0.68rem}
-.rdoc-body{padding:0.3rem 0.4rem}
-.rdoc-field{font-weight:700;color:var(--gray-2);margin:0.2rem 0 0.05rem;font-size:0.65rem}
-.rdoc-hl{color:var(--gold-1);font-weight:600}
-.rdoc-line{font-size:0.6rem;color:var(--gray-3);padding:0.04rem 0;line-height:1.3}
-.rdoc-hiline{color:var(--gray-2);font-weight:500}
-.rdoc-num{color:var(--green);font-weight:700}
-.rdoc-tag{font-size:0.55rem;padding:1px 4px;border-radius:3px;background:var(--warm-3);color:var(--gold-1);font-weight:600;margin:0 1px}
-.rcase-verdict{display:flex;flex-wrap:wrap;gap:2px;margin-top:0.3rem;font-size:0.62rem;align-items:center}
-.rv-bad{color:#C53030}
-.rv-good{color:#276749}
-.rv-tag{font-size:0.58rem;padding:1px 4px;border-radius:3px;background:#FFF5F5;color:#C53030;margin:0 1px}
-.rv-tag-good{font-size:0.58rem;padding:1px 4px;border-radius:3px;background:#F0FFF4;color:#276749;margin:0 1px}
-
-/* ===== Coaching Cases ===== */
-.coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-@media(max-width:768px){.coach-grid{grid-template-columns:1fr}}
-.ccase-card{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--gray-5);transition:all 0.3s;padding:1.2rem}
-.ccase-card:hover{box-shadow:0 8px 24px rgba(212,168,67,0.1)}
-.ccase-top{display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem}
-.ccase-avatar{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.ccase-person{flex:1}
-.ccase-person h3{font-size:0.95rem;font-weight:700;color:var(--gray-1)}
-.ccase-target{font-size:0.78rem;color:var(--gray-3);margin-top:0.1rem}
-.ccase-salary{font-size:0.85rem;font-weight:700;color:var(--gold-2);white-space:nowrap}
-.ccase-body p{font-size:0.85rem;color:var(--gray-2);line-height:1.7;margin-bottom:0.8rem}
-.ccase-body p strong{color:var(--gold-1)}
-.ccase-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-bottom:0.6rem}
-@media(max-width:480px){.ccase-metrics{grid-template-columns:repeat(2,1fr)}}
-.ccase-metric{text-align:center;padding:0.4rem;border-radius:8px;background:var(--warm-3)}
-.ccase-val{display:block;font-size:1rem;font-weight:800;color:var(--gold-2);line-height:1.2}
-.ccase-lbl{font-size:0.65rem;color:var(--gray-3)}
-.ccase-services{display:flex;flex-wrap:wrap;gap:4px}
-.cs-tag{font-size:0.7rem;padding:0.15rem 0.5rem;border-radius:999px;background:var(--warm-3);color:var(--gold-1);font-weight:600}
-
-/* ===== CTA Footer ===== */
-.steps{display:flex;flex-direction:column;gap:1rem;max-width:700px;margin:0 auto}
-.step{
-  display:flex;gap:1.2rem;align-items:flex-start;
-  padding:1.2rem 1.5rem;border-radius:12px;
-  background:var(--white);border:1px solid var(--gray-5);
-  transition:all 0.3s;
-}
-.step:hover{border-color:var(--gold-2);box-shadow:0 4px 16px rgba(212,168,67,0.08)}
-.step-num{
-  width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  background:var(--gold-2);color:var(--white);font-weight:800;font-size:0.9rem;flex-shrink:0;
-}
-.step-content{flex:1}
-.step-content h4{font-size:1rem;font-weight:700;color:var(--gray-1);margin-bottom:0.2rem}
-.step-content p{font-size:0.88rem;color:var(--gray-3);line-height:1.6}
-
-/* ===== About Section - Portfolio Style ===== */
-.about-portfolio{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 280px 280px;gap:2.5rem;align-items:start}
-@media(max-width:1024px){.about-portfolio{grid-template-columns:1fr 220px;gap:2rem}}
-@media(max-width:768px){.about-portfolio{grid-template-columns:1fr;gap:2rem;text-align:center}}
-
-/* Left column - Intro */
-.about-intro{}
-.about-intro h3{font-size:1.5rem;font-weight:700;color:var(--gray-1);margin-bottom:1.2rem;line-height:1.4}
-.about-intro h3 .name-highlight{background:linear-gradient(120deg,transparent 0%,rgba(212,168,67,0.15) 30%,rgba(212,168,67,0.15) 70%,transparent 100%);padding:0 0.2rem}
-.about-intro .intro-subtitle{font-size:0.95rem;color:var(--gray-3);margin-bottom:1.5rem;line-height:1.7}
-.about-intro .intro-body{font-size:0.9rem;color:var(--gray-2);line-height:1.9;margin-bottom:1rem}
-.about-intro .intro-body p{margin-bottom:0.8rem}
-.about-intro .career-tag{display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.8rem;background:var(--warm-3);border-radius:6px;font-size:0.8rem;color:var(--gold-1);font-weight:600;margin:0.15rem 0.1rem}
-.about-intro .career-tag .arrow{color:var(--gold-2);font-size:0.7rem}
-
-/* Center column - Photo */
-.about-photo-center{width:100%;border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.12)}
-.about-photo-center img{width:100%;height:auto;display:block;aspect-ratio:3/4;object-fit:cover}
-@media(max-width:1024px){.about-photo-center{max-width:220px;margin:0 auto}}
-
-/* Right column - Cards */
-.about-cards{display:flex;flex-direction:column;gap:1rem}
-.about-card{background:var(--white);border-radius:12px;padding:1.2rem;border:1px solid var(--gray-5);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.about-card h4{font-size:0.85rem;font-weight:700;color:var(--gray-1);margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid var(--gray-5)}
-.about-card .card-item{display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0;border-bottom:1px solid var(--gray-6);font-size:0.82rem;color:var(--gray-2)}
-.about-card .card-item:last-child{border-bottom:none}
-.about-card .card-item svg{width:18px;height:18px;color:var(--gold-2);flex-shrink:0}
-.about-card .card-item:hover{color:var(--gold-1)}
-
-/* Testimonials card */
-.testimonials{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
-.testimonial-placeholder{aspect-ratio:1;border-radius:8px;background:linear-gradient(135deg,var(--gray-6),var(--gray-5));border:2px dashed var(--gray-4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;color:var(--gray-4);font-size:0.65rem;cursor:pointer;transition:all 0.2s}
-.testimonial-placeholder:hover{border-color:var(--gold-2);color:var(--gold-2);background:var(--warm-3)}
-.testimonial-placeholder svg{width:20px;height:20px;opacity:0.5}
-
-/* Mobile adjustments */
-@media(max-width:768px){
-  .about-card{margin:0 auto;max-width:320px;width:100%}
-  .about-photo-center{max-width:180px}
-}
-
-/* ===== Showcase ===== */
-.showcase-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:stretch}
-@media(max-width:900px){.showcase-row{grid-template-columns:1fr}}
-.showcase-col{
-  background:var(--white);border-radius:20px;padding:1.5rem;
-  border:1px solid var(--gray-5);display:flex;flex-direction:column;
-}
-.showcase-col-header{display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
-.sc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.showcase-col-header h3{font-size:1.1rem;font-weight:700;color:var(--gray-1)}
-.showcase-col-header p{font-size:0.82rem;color:var(--gray-3);margin-top:0.1rem}
-
-/* Resume Compare in Showcase */
-.sc-resume{display:grid;grid-template-columns:1fr auto 1fr;gap:0.5rem;flex:1;align-items:start}
-@media(max-width:480px){.sc-resume{grid-template-columns:1fr}}
-.sc-r-side{padding:0.6rem;border-radius:8px;display:flex;flex-direction:column}
-.sc-r-before{background:#FFF5F5}
-.sc-r-after{background:#F0FFF4}
-.sc-r-label{font-size:0.75rem;font-weight:700;margin-bottom:0.4rem}
-.sc-r-bad{color:#E53E3E}
-.sc-r-good{color:#38A169}
-.sc-r-doc{background:var(--white);border:1px solid var(--gray-5);border-radius:6px;overflow:hidden;font-family:"Courier New",monospace;font-size:0.72rem}
-.sc-r-doc-good{border-color:#C6F6D5}
-.sc-r-head{background:#F7FAFC;padding:0.25rem 0.4rem;font-weight:700;color:var(--gray-2);border-bottom:1px solid var(--gray-5);font-size:0.72rem}
-.sc-r-body{padding:0.3rem 0.4rem}
-.sc-r-field{font-weight:700;color:var(--gray-2);margin:0.2rem 0 0.05rem;font-size:0.68rem}
-.sc-r-hl{color:var(--gold-1);font-weight:600;margin-left:0.2rem}
-.sc-r-item{font-size:0.62rem;color:var(--gray-3);padding:0.05rem 0;line-height:1.35}
-.sc-num{color:var(--green);font-weight:700}
-.sc-r-skills{display:flex;flex-wrap:wrap;gap:2px;margin-top:3px}
-.sc-skill{font-size:0.58rem;padding:1px 5px;border-radius:3px;background:var(--warm-3);color:var(--gold-1);font-weight:600}
-.sc-r-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:0.4rem}
-.sc-tag-bad{font-size:0.65rem;color:#C53030;background:#FFF5F5;padding:1px 5px;border-radius:4px}
-.sc-tag-good{font-size:0.65rem;color:#276749;background:#F0FFF4;padding:1px 5px;border-radius:4px}
-.sc-r-arrow{display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:var(--gold-2)}
-
-/* Coaching in Showcase */
-.sc-coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;flex:1}
-.sc-coach-item{
-  display:flex;align-items:center;gap:0.6rem;
-  padding:0.6rem 0.7rem;border-radius:10px;border:1px solid var(--gray-5);
-  transition:all 0.2s;
-}
-.sc-coach-item:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(212,168,67,0.1);border-color:var(--gold-3)}
-.sc-coach-icon{font-size:1.3rem;width:36px;text-align:center;flex-shrink:0}
-.sc-coach-text h4{font-size:0.82rem;font-weight:700;color:var(--gray-1);margin-bottom:0.1rem}
-.sc-coach-text p{font-size:0.72rem;color:var(--gray-3);line-height:1.3}
-
-/* ===== CTA Footer ===== */
-.cta-section{
-  background:linear-gradient(135deg,var(--dark-1),#1A1210);
-  text-align:center;padding:4rem 2rem;
-}
-.cta-section h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--white);margin-bottom:0.8rem}
-.cta-section p{color:rgba(192,192,192,0.8);margin-bottom:2rem;font-size:1.05rem}
-.cta-section .hero-cta{margin-top:0}
-
-/* ===== Responsive ===== */
-@media(max-width:768px){
-  .hero-stats{gap:1.5rem}
-  .section-number{display:none}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-<style>
-/* ===== Notion-Inspired Reset ===== */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#FFFFFF; --bg-alt:#F7F6F3; --bg-card:#FFFFFF;
-  --text:#37352F; --text-secondary:#9B9A97; --text-heading:#0F0F0F;
-  --border:#E2E8F0; --border-light:#F0F0F0;
-  --accent:#2383E2; --accent-hover:#0B6E99; --accent-light:#EBF5FF;
-  --red:#E03E3E; --green:#0F7B6C; --gold:#D9730D;
-  --section-pad:clamp(3rem,6vw,6rem); --max-w:900px;
-}
-html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-  background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-a{color:var(--accent);text-decoration:none}
-a:hover{color:var(--accent-hover)}
-
-/* Progress bar */
-.progress-bar{position:fixed;top:0;left:0;width:0;height:2px;background:var(--accent);z-index:1001;transition:width 0.3s}
-
-/* ===== Section Common ===== */
-.section{padding:var(--section-pad) 1.5rem;position:relative}
+/* Sections */
+.section{padding:5rem 1.5rem}
 .section-inner{max-width:var(--max-w);margin:0 auto}
-.section-alt{background:var(--bg-alt)}
-.section-label{font-size:0.75rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem}
-.section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--text-heading);margin-bottom:0.5rem;line-height:1.3}
-.section-desc{font-size:1rem;color:var(--text-secondary);margin-bottom:2.5rem;line-height:1.7}
+.section-alt{background:var(--bg2)}
+.section-label{font-size:.75rem;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem}
+.section-title{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;color:var(--text3);margin-bottom:.5rem}
+.section-desc{font-size:.95rem;color:var(--text2);margin-bottom:2.5rem;max-width:600px}
 
-/* ===== Scroll Reveal ===== */
-.reveal{opacity:0;transform:translateY(20px);transition:all 0.5s cubic-bezier(0.22,1,0.36,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:0.1s}
-.reveal-delay-2{transition-delay:0.2s}
-.reveal-delay-3{transition-delay:0.3s}
-
-/* ===== Hero (clean, minimal, white) ===== */
-.hero{
-  position:relative;min-height:85vh;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(160deg,#FAFAFA,#FFFFFF);overflow:hidden;padding:2rem 1.5rem;
-  border-bottom:1px solid var(--border);
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 80% 20%,rgba(35,131,226,0.04) 0%,transparent 50%),
-             radial-gradient(ellipse at 20% 80%,rgba(35,131,226,0.02) 0%,transparent 50%);
-  pointer-events:none;
-}
-.hero-content{position:relative;z-index:2;text-align:center;max-width:720px}
-.hero-badge{
-  display:inline-block;padding:0.35rem 1rem;border-radius:6px;
-  background:var(--accent-light);color:var(--accent);
-  font-size:0.8rem;font-weight:600;margin-bottom:1.5rem;
-}
-.hero h1{
-  font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;color:var(--text-heading);
-  line-height:1.2;margin-bottom:1.2rem;letter-spacing:-0.02em;
-}
-.hero h1 span{background:linear-gradient(135deg,var(--text-heading),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(1rem,1.8vw,1.15rem);color:var(--text-secondary);margin-bottom:2rem;line-height:1.8}
-.hero-stats{display:flex;justify-content:center;gap:clamp(1.5rem,4vw,3rem);flex-wrap:wrap;margin-bottom:2.5rem}
+/* Hero */
+.hero{min-height:85vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#FAFAFA,#fff);padding:2rem 1.5rem;border-bottom:1px solid var(--border)}
+.hero-content{text-align:center;max-width:680px}
+.hero h1{font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:700;color:var(--text3);line-height:1.15;margin-bottom:1rem;letter-spacing:-.02em}
+.hero h1 span{background:linear-gradient(135deg,var(--text3),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.05rem;color:var(--text2);margin-bottom:2rem;line-height:1.7}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:2rem}
 .hero-stat{text-align:center}
-.hero-stat-num{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--text-heading);line-height:1}
-.hero-stat-label{font-size:0.8rem;color:var(--text-secondary);margin-top:0.25rem}
-.hero-cta{
-  display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 2rem;border-radius:8px;
-  background:var(--accent);color:var(--bg);font-weight:600;font-size:1rem;
-  text-decoration:none;transition:all 0.2s;box-shadow:0 2px 8px rgba(35,131,226,0.2);
-}
-.hero-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 16px rgba(35,131,226,0.3)}
-.hero-cta svg{width:18px;height:18px;transition:transform 0.2s}
-.hero-cta:hover svg{transform:translateX(3px)}
-.hero-scroll-hint{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.2rem;color:var(--text-secondary);font-size:0.7rem;animation:bounceDown 2s infinite;cursor:pointer;z-index:2;background:none;border:none}
-@keyframes bounceDown{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-.hero-scroll-hint svg{width:20px;height:20px}
+.hero-stat-num{font-size:1.8rem;font-weight:700;color:var(--text3);line-height:1}
+.hero-stat-label{font-size:.8rem;color:var(--text2);margin-top:.2rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 2rem;border-radius:8px;background:var(--text3);color:#fff;font-weight:600;font-size:.95rem;border:none;cursor:pointer;transition:all .2s}
+.btn:hover{opacity:.9;transform:translateY(-1px)}
+.btn svg{width:18px;height:18px;transition:transform .2s}
+.btn:hover svg{transform:translateX(3px)}
+.hero-scroll{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);color:var(--text2);font-size:.7rem;animation:bounce 2s infinite;cursor:pointer;background:none;border:none}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 
-/* ===== About - Notion clean bio style ===== */
-.about-bio{max-width:720px;margin:0 auto}
-.about-bio h3{font-size:1.5rem;font-weight:700;color:var(--text-heading);margin-bottom:1.2rem;line-height:1.4}
-.about-bio h3 .hl{background:linear-gradient(120deg,transparent 0%,var(--accent-light) 30%,var(--accent-light) 70%,transparent 100%);padding:0 0.2rem}
-.about-bio .bio-sub{font-size:0.95rem;color:var(--text-secondary);margin-bottom:1.5rem;line-height:1.7}
-.about-bio .bio-body{font-size:0.92rem;color:var(--text);line-height:1.8}
-.about-bio .bio-body p{margin-bottom:0.8rem}
-.about-bio .bio-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin:0.5rem 0 0.8rem}
-.about-bio .bio-tag{padding:0.2rem 0.7rem;background:var(--bg-alt);border:1px solid var(--border);border-radius:4px;font-size:0.8rem;color:var(--text-secondary);font-weight:500}
-.about-bio .bio-highlight{color:var(--accent);font-weight:600}
-.about-bio .bio-divider{height:1px;background:var(--border);margin:1.5rem 0}
-.about-bio .bio-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem}
-@media(max-width:768px){.about-bio .bio-gallery{grid-template-columns:repeat(2,1fr)}}
-.about-bio .bio-gallery-item{aspect-ratio:1;border-radius:6px;border:2px dashed var(--border);background:var(--bg-alt);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;color:var(--text-secondary);font-size:0.7rem;cursor:pointer;transition:all 0.2s}
-.about-bio .bio-gallery-item:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
-.about-bio .bio-gallery-item svg{width:20px;height:20px;opacity:0.5}
+/* About */
+.about-content{max-width:680px;margin:0 auto}
+.about-content h3{font-size:1.4rem;font-weight:700;color:var(--text3);margin-bottom:1rem;line-height:1.4}
+.about-content h3 em{font-style:normal;background:linear-gradient(120deg,transparent 0%,var(--blue3) 30%,var(--blue3) 70%,transparent 100%);padding:0 .2rem}
+.about-content .sub{font-size:.95rem;color:var(--text2);margin-bottom:1.2rem;line-height:1.7}
+.about-content p{font-size:.92rem;color:var(--text);line-height:1.8;margin-bottom:.7rem}
+.about-content .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 1rem}
+.about-content .tag{padding:.15rem .6rem;background:var(--bg2);border:1px solid var(--border);border-radius:4px;font-size:.78rem;color:var(--text2);font-weight:500}
+.about-content .hl{color:var(--blue);font-weight:600}
+.divider{height:1px;background:var(--border);margin:1.5rem 0}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+@media(max-width:640px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gallery .item{aspect-ratio:1;border-radius:6px;border:2px dashed var(--border);background:var(--bg2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;color:var(--text2);font-size:.7rem;cursor:pointer;transition:all .2s}
+.gallery .item:hover{border-color:var(--blue);color:var(--blue);background:var(--blue3)}
+.gallery .item svg{width:20px;height:20px;opacity:.5}
 
-/* ===== Notion-style cards ===== */
-.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-@media(max-width:768px){.cards-grid{grid-template-columns:1fr}}
-.notion-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:1.5rem;transition:all 0.2s}
-.notion-card:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(35,131,226,0.06)}
-.notion-card .nc-icon{width:40px;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:0.8rem}
-.notion-card h3{font-size:1.05rem;font-weight:600;color:var(--text-heading);margin-bottom:0.4rem}
-.notion-card .nc-desc{font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin-bottom:0.8rem}
-.notion-card ul{list-style:none;margin:0.6rem 0 0.8rem}
-.notion-card ul li{position:relative;padding:0.2rem 0 0.2rem 1.2rem;font-size:0.82rem;color:var(--text);line-height:1.5}
-.notion-card ul li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:600}
-.notion-card .nc-price{display:flex;align-items:center;justify-content:space-between;padding-top:0.8rem;border-top:1px solid var(--border)}
-.notion-card .nc-price .price{font-size:1.1rem;font-weight:700;color:var(--text-heading)}
-.notion-card .nc-price .price small{font-size:0.75rem;font-weight:400;color:var(--text-secondary);margin-left:0.3rem}
-.notion-card .nc-btn{display:inline-flex;align-items:center;gap:0.3rem;padding:0.35rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:500;transition:all 0.2s;cursor:pointer}
-.nc-btn-primary{background:var(--accent);color:var(--bg);border:none}
-.nc-btn-primary:hover{background:var(--accent-hover)}
-.nc-btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
-.nc-btn-outline:hover{border-color:var(--accent);color:var(--accent)}
-.nc-badge{display:inline-block;padding:0.1rem 0.5rem;border-radius:4px;font-size:0.7rem;font-weight:600;margin-left:0.4rem}
-.nc-badge-popular{background:rgba(217,115,13,0.1);color:var(--gold)}
-.nc-badge-new{background:var(--accent-light);color:var(--accent)}
-.notion-card .nc-note{padding:0.5rem;border-radius:4px;background:rgba(217,115,13,0.06);border:1px solid rgba(217,115,13,0.15);font-size:0.78rem;color:var(--gold);line-height:1.5;margin-top:0.6rem}
+/* Cards Grid */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.5rem;transition:all .2s}
+.card:hover{border-color:var(--blue);box-shadow:0 2px 10px rgba(35,131,226,.06)}
+.card .icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.7rem}
+.card h3{font-size:1rem;font-weight:600;color:var(--text3);margin-bottom:.35rem}
+.card .desc{font-size:.82rem;color:var(--text2);line-height:1.5;margin-bottom:.7rem}
+.card ul{list-style:none;margin:.5rem 0 .7rem}
+.card ul li{padding:.15rem 0 .15rem 1.2rem;font-size:.8rem;color:var(--text);line-height:1.5;position:relative}
+.card ul li::before{content:'✓';position:absolute;left:0;color:var(--blue);font-weight:600}
+.price-row{display:flex;align-items:center;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--border)}
+.price-row .price{font-size:1.05rem;font-weight:700;color:var(--text3)}
+.price-row .price small{font-size:.72rem;font-weight:400;color:var(--text2);margin-left:.3rem}
+.price-row .card-btn{padding:.3rem 1rem;border-radius:6px;font-size:.78rem;font-weight:500;border:1px solid var(--text3);background:transparent;color:var(--text3);cursor:pointer;transition:all .2s}
+.price-row .card-btn:hover{background:var(--text3);color:#fff}
+.price-row .card-btn.primary{background:var(--text3);color:#fff;border:none}
+.price-row .card-btn.primary:hover{opacity:.9}
+.badge{display:inline-block;padding:.08rem .5rem;border-radius:4px;font-size:.68rem;font-weight:600;margin-left:.3rem}
+.badge-popular{background:rgba(217,115,13,.1);color:#D9730D}
+.badge-new{background:var(--blue3);color:var(--blue)}
+.card .note{padding:.4rem;border-radius:4px;background:rgba(217,115,13,.06);border:1px solid rgba(217,115,13,.15);font-size:.75rem;color:#D9730D;line-height:1.4;margin-top:.5rem}
 
-/* ===== Case cards ===== */
-.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+/* Cases */
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 @media(max-width:768px){.case-grid{grid-template-columns:1fr}}
-.case-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:1.2rem;transition:all 0.2s}
-.case-card:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(35,131,226,0.06)}
-.case-card h4{font-size:0.95rem;font-weight:600;color:var(--text-heading);margin-bottom:0.15rem}
-.case-card .case-meta{font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.3rem}
-.case-result{display:inline-flex;align-items:center;gap:0.2rem;padding:0.15rem 0.6rem;border-radius:4px;background:rgba(15,123,108,0.08);color:var(--green);font-size:0.72rem;font-weight:600}
-.case-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:0.4rem;margin-top:0.6rem;align-items:start}
+.case-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem;transition:all .2s;font-size:.85rem}
+.case-card:hover{border-color:var(--blue)}
+.case-card h4{font-size:.88rem;font-weight:600;color:var(--text3);margin-bottom:.1rem}
+.case-card .meta{font-size:.72rem;color:var(--text2)}
+.case-result{display:inline-flex;padding:.1rem .5rem;border-radius:4px;background:rgba(15,123,108,.08);color:var(--green);font-size:.68rem;font-weight:600;gap:.2rem}
+.case-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:.3rem;margin-top:.5rem;font-size:.65rem}
 @media(max-width:480px){.case-compare{grid-template-columns:1fr}}
-.case-side{padding:0.4rem;border-radius:4px;font-size:0.68rem;line-height:1.4}
-.case-before{background:#FFF5F5}
-.case-after{background:#F0FFF4}
-.case-side .cs-label{font-size:0.65rem;font-weight:600;margin-bottom:0.2rem;display:block}
-.case-side .cs-bad{color:var(--red)}
-.case-side .cs-good{color:var(--green)}
-.case-side .cs-line{color:var(--text);padding:0.05rem 0}
-.case-side .cs-num{color:var(--green);font-weight:600}
-.case-side .cs-hl{color:var(--accent);font-weight:600}
-.case-vs{display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-secondary)}
+.case-side{padding:.35rem;border-radius:4px}
+.bf{background:#FFF5F5}
+.af{background:#F0FFF4}
+.case-side .lbl{font-size:.6rem;font-weight:600;display:block;margin-bottom:.15rem}
+.clr-bad{color:#E03E3E}
+.clr-good{color:var(--green)}
+.clr-blue{color:var(--blue);font-weight:600}
+.clr-num{color:var(--green);font-weight:600}
+.case-vs{display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:.8rem}
+.case-doc{background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden;font-family:"Courier New",monospace;font-size:.62rem}
+.case-doc .dh{background:#F7FAFC;padding:.15rem .3rem;font-weight:600;border-bottom:1px solid var(--border);font-size:.6rem}
+.case-doc .db{padding:.2rem .3rem}
+.case-doc .df{font-weight:600;margin:.15rem 0 .05rem}
+.case-doc .dl{font-size:.58rem;padding:.03rem 0}
+.tags{display:flex;flex-wrap:wrap;gap:2px;margin-top:.3rem}
+.tags .t{font-size:.55rem;padding:1px 4px;border-radius:3px;font-weight:600}
+.tb{background:#FFF5F5;color:#C53030}
+.tg{background:#F0FFF4;color:#276749}
+.tblue{background:var(--blue3);color:var(--blue)}
 
-/* ===== Coaching ===== */
-.coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+/* Coaching */
+.coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 @media(max-width:768px){.coach-grid{grid-template-columns:1fr}}
-.coach-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:1.2rem;transition:all 0.2s}
-.coach-card:hover{border-color:var(--accent)}
-.coach-top{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem}
-.coach-avatar{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.coach-person{flex:1}
-.coach-person h4{font-size:0.9rem;font-weight:600;color:var(--text-heading)}
-.coach-person .c-target{font-size:0.75rem;color:var(--text-secondary)}
-.coach-salary{font-size:0.85rem;font-weight:600;color:var(--accent)}
-.coach-body p{font-size:0.82rem;color:var(--text);line-height:1.6;margin-bottom:0.6rem}
-.coach-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:0.4rem}
-@media(max-width:480px){.coach-metrics{grid-template-columns:repeat(2,1fr)}}
-.coach-metric{text-align:center;padding:0.3rem;border-radius:4px;background:var(--accent-light)}
-.coach-metric .cm-val{display:block;font-size:0.95rem;font-weight:700;color:var(--accent);line-height:1.2}
-.coach-metric .cm-lbl{font-size:0.6rem;color:var(--text-secondary)}
-.coach-services{display:flex;flex-wrap:wrap;gap:3px;margin-top:0.6rem}
-.cs-tag{padding:0.1rem 0.5rem;border-radius:4px;background:var(--accent-light);color:var(--accent);font-size:0.68rem;font-weight:500}
+.coach-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem;font-size:.85rem;transition:all .2s}
+.coach-card:hover{border-color:var(--blue)}
+.c-top{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.c-avatar{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.c-info{flex:1}
+.c-info h4{font-size:.85rem;font-weight:600;color:var(--text3)}
+.c-info .ct{font-size:.7rem;color:var(--text2)}
+.c-salary{font-size:.8rem;font-weight:600;color:var(--blue)}
+.c-body p{font-size:.78rem;color:var(--text);line-height:1.6;margin-bottom:.5rem}
+.c-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem}
+@media(max-width:480px){.c-metrics{grid-template-columns:repeat(2,1fr)}}
+.c-metric{text-align:center;padding:.25rem;border-radius:4px;background:var(--blue3)}
+.c-metric .cv{display:block;font-size:.9rem;font-weight:700;color:var(--blue);line-height:1.2}
+.c-metric .cl{font-size:.55rem;color:var(--text2)}
+.c-services{display:flex;flex-wrap:wrap;gap:3px;margin-top:.5rem}
+.c-s-tag{padding:.1rem .4rem;border-radius:4px;background:var(--blue3);color:var(--blue);font-size:.65rem;font-weight:500}
 
-/* ===== Steps ===== */
-.steps{display:flex;flex-direction:column;gap:0.8rem;max-width:600px;margin:0 auto}
-.step{display:flex;gap:1rem;align-items:flex-start;padding:1rem 1.2rem;border-radius:6px;background:var(--bg-card);border:1px solid var(--border);transition:all 0.2s}
-.step:hover{border-color:var(--accent)}
-.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--accent-light);color:var(--accent);font-weight:700;font-size:0.8rem;flex-shrink:0}
-.step-content{flex:1}
-.step-content h4{font-size:0.92rem;font-weight:600;color:var(--text-heading);margin-bottom:0.1rem}
-.step-content p{font-size:0.82rem;color:var(--text-secondary);line-height:1.5}
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:.7rem;max-width:560px;margin:0 auto}
+.step{display:flex;gap:.8rem;padding:.8rem 1rem;border-radius:6px;background:#fff;border:1px solid var(--border)}
+.step:hover{border-color:var(--blue)}
+.step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--blue3);color:var(--blue);font-weight:700;font-size:.75rem;flex-shrink:0}
+.step-content h4{font-size:.88rem;font-weight:600;color:var(--text3);margin-bottom:.05rem}
+.step-content p{font-size:.78rem;color:var(--text2);line-height:1.5}
 
-/* ===== CTA ===== */
-.cta-section{background:linear-gradient(160deg,#FAFAFA,#FFFFFF);text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--border)}
-.cta-section h2{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;color:var(--text-heading);margin-bottom:0.6rem}
-.cta-section p{color:var(--text-secondary);margin-bottom:1.5rem;font-size:1rem}
-.cta-section .hero-cta{margin-top:0}
+/* CTA */
+.cta{background:var(--text3);color:#fff;text-align:center;padding:4rem 1.5rem}
+.cta h2{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;margin-bottom:.5rem}
+.cta p{opacity:.7;margin-bottom:1.5rem;font-size:.95rem}
+.cta .btn{background:#fff;color:var(--text3)}
 
-/* ===== Responsive ===== */
-@media(max-width:768px){.hero-stats{gap:1.5rem}}
+/* Reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:all .5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}
+.d2{transition-delay:.2s}
+.d3{transition-delay:.3s}
+
+/* Responsive */
+@media(max-width:768px){
+  .section{padding:3rem 1rem}
+  .hero-stats{gap:1.5rem}
+}
 </style>
 </head>
 <body>
 
-<!-- Progress Bar -->
-<div class="progress-bar" id="progressBar"></div>
+<div class="progress" id="progress"></div>
 
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <section class="hero" id="hero">
-  
-      <div class="hero-content">
-    <div class="hero-badge reveal">大学生求职辅导</div>
-    <h1 class="reveal reveal-delay-1"><span>让每一位同学，都能找到好工作</span></h1>
-    <p class="hero-sub reveal reveal-delay-2">从简历打磨 → 面试通关 → offer 谈判，一站式求职陪跑服务</p>
-    <div class="hero-stats reveal reveal-delay-3">
+  <div class="hero-content">
+    <h1 class="reveal"><span>让每一位同学，<br>都能找到好工作</span></h1>
+    <p class="hero-sub reveal d1">从简历打磨 → 面试通关 → offer 谈判，<br>一站式求职陪跑服务</p>
+    <div class="hero-stats reveal d2">
       <div class="hero-stat">
         <div class="hero-stat-num"><span class="countup" data-target="300">0</span>+</div>
         <div class="hero-stat-label">学员成功上岸</div>
@@ -602,636 +179,228 @@ a:hover{color:var(--accent-hover)}
         <div class="hero-stat-label">简历通过率提升</div>
       </div>
     </div>
-    <a href="#services" class="hero-cta reveal reveal-delay-4">
+    <a href="#services" class="btn reveal d3">
       了解服务
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
-  <button class="hero-scroll-hint" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" aria-label="向下滚动">
-    <span>向下探索</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </button>
+  <button class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">向下探索 ↓</button>
 </section>
 
-<!-- ===== ABOUT · 我是谁 ===== -->
+<!-- ABOUT -->
 <div class="section-wrapper">
-<div class="section-number">01</div>
-<section class="section section-alt" id="about">
+<div id="about" style="position:relative">
+<div class="section section-alt">
   <div class="section-inner">
     <div class="section-label reveal">About</div>
-    <h2 class="section-title reveal reveal-delay-1">我是谁</h2>
-    <p class="section-desc reveal reveal-delay-2">从简历到 offer，一站式帮你搞定</p>
-        <div class="about-bio">
-      <h3>你好，我是<span class="hl">胡八道</span></h3>
-      <p class="bio-sub">韶关学院计算机专业出身，从 Shein → 阿里国际 → 钛动科技，一路摸爬滚打过来的实战派。</p>
-      <div class="bio-body">
-        <p>我从大二就开始实习，尝试过前端开发、电商运营、新媒体运营、内容运营等多个方向，最终校招上岸。</p>
-        <p>求职这件事，真的没人帮助真的很难。我把自己踩过的坑、试对的方法，沉淀成一套可复用的求职知识库，希望能帮助大家避开求职的弯路。</p>
-        <p>截止至今，我已经帮 <span class="bio-highlight">100+ 学员</span>拿下了互联网大厂、外企、优质民营企业的 offer。</p>
-        <div class="bio-tags">
-          <span class="bio-tag">前端开发</span>
-          <span class="bio-tag">电商运营</span>
-          <span class="bio-tag">新媒体运营</span>
-          <span class="bio-tag">内容运营</span>
-          <span class="bio-tag">产品运营</span>
-          <span class="bio-tag">海外投放</span>
-        </div>
+    <h2 class="section-title reveal d1">我是谁</h2>
+    <p class="section-desc reveal d2">从简历到 offer，一站式帮你搞定</p>
+    <div class="about-content reveal d2">
+      <h3>你好，我是<em>胡八道</em></h3>
+      <p class="sub">韶关学院计算机专业出身，从 Shein → 阿里国际 → 钛动科技，一路摸爬滚打过来的实战派。</p>
+      <p>我从大二就开始实习，尝试过前端开发、电商运营、新媒体运营、内容运营等多个方向，最终校招上岸。</p>
+      <p>求职这件事，真的没人帮助真的很难。我把自己踩过的坑、试对的方法，沉淀成一套可复用的求职知识库，希望能帮助大家避开求职的弯路。</p>
+      <p>截止至今，我已经帮 <span class="hl">100+ 学员</span>拿下了互联网大厂、外企、优质民营企业的 offer。</p>
+      <div class="tags">
+        <span class="tag">前端开发</span>
+        <span class="tag">电商运营</span>
+        <span class="tag">新媒体运营</span>
+        <span class="tag">内容运营</span>
+        <span class="tag">产品运营</span>
+        <span class="tag">海外投放</span>
       </div>
-      <div class="bio-divider"></div>
-      <div class="bio-gallery">
-        <div class="bio-gallery-item">
+      <div class="divider"></div>
+      <div class="gallery">
+        <div class="item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>学员好评</span>
         </div>
-        <div class="bio-gallery-item">
+        <div class="item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>学员好评</span>
         </div>
-        <div class="bio-gallery-item">
+        <div class="item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>学员好评</span>
         </div>
-        <div class="bio-gallery-item">
+        <div class="item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>学员好评</span>
-        </div>
-      </div>
-    </div>    </div>
-  </div>
-</section>
-</div>
-
-<!-- ===== SHOWCASE · 服务展示 ===== -->
-<div class="section-wrapper">
-<section class="section section-alt" id="showcase">
-  <div class="section-inner">
-    <div class="section-label reveal">What I Do</div>
-    <h2 class="section-title reveal reveal-delay-1">服务展示</h2>
-    <p class="section-desc reveal reveal-delay-2">看看我能帮你做什么，每个服务都看得见效果</p>
-
-    <div class="showcase-row">
-      <!-- LEFT: Resume Optimization -->
-      <div class="showcase-col showcase-col-resume reveal">
-        <div class="showcase-col-header">
-          <span class="sc-icon" style="background:#FEF3C7;color:#D97706">📄</span>
-          <div>
-            <h3>简历优化</h3>
-            <p>从排版到内容到关键词，打磨职场第一张名片</p>
-          </div>
-        </div>
-
-        <div class="sc-resume">
-          <!-- Before -->
-          <div class="sc-r-side sc-r-before">
-            <div class="sc-r-label sc-r-bad">❌ 优化前</div>
-            <div class="sc-r-doc">
-              <div class="sc-r-head">个人简历</div>
-              <div class="sc-r-body">
-                <div class="sc-r-field">工作经历</div>
-                <div class="sc-r-item">· 负责公司运营工作</div>
-                <div class="sc-r-item">· 协助团队完成日常任务</div>
-                <div class="sc-r-field">项目经历</div>
-                <div class="sc-r-item">· 参与项目，做基础工作</div>
-                <div class="sc-r-field">自我评价</div>
-                <div class="sc-r-item">· 工作认真负责，学习能力强</div>
-              </div>
-            </div>
-            <div class="sc-r-tags">
-              <span class="sc-tag-bad">✗ 排版混乱</span>
-              <span class="sc-tag-bad">✗ 没有数据</span>
-              <span class="sc-tag-bad">✗ 缺乏关键词</span>
-            </div>
-          </div>
-
-          <div class="sc-r-arrow">→</div>
-
-          <!-- After -->
-          <div class="sc-r-side sc-r-after">
-            <div class="sc-r-label sc-r-good">✅ 优化后</div>
-            <div class="sc-r-doc sc-r-doc-good">
-              <div class="sc-r-head">个人简历 · 目标：产品运营</div>
-              <div class="sc-r-body">
-                <div class="sc-r-field">产品运营 · XX公司 <span class="sc-r-hl">2019-2021</span></div>
-                <div class="sc-r-item">· 负责APP用户增长，<span class="sc-num">DAU提升25%</span></div>
-                <div class="sc-r-item">· 搭建分层运营体系，<span class="sc-num">留存率+18%</span></div>
-                <div class="sc-r-field">核心技能匹配</div>
-                <div class="sc-r-skills">
-                  <span class="sc-skill">数据分析</span>
-                  <span class="sc-skill">用户增长</span>
-                  <span class="sc-skill">A/B测试</span>
-                </div>
-              </div>
-            </div>
-            <div class="sc-r-tags">
-              <span class="sc-tag-good">✓ STAR结构</span>
-              <span class="sc-tag-good">✓ 数据量化</span>
-              <span class="sc-tag-good">✓ 关键词高亮</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT: Coaching -->
-      <div class="showcase-col showcase-col-coach reveal reveal-delay-1">
-        <div class="showcase-col-header">
-          <span class="sc-icon" style="background:#EDE9FE;color:#7C3AED">🎯</span>
-          <div>
-            <h3>求职陪跑</h3>
-            <p>从定制简历到拿 offer，全程有人带着你走</p>
-          </div>
-        </div>
-
-        <div class="sc-coach-grid">
-          <div class="sc-coach-item">
-            <div class="sc-coach-icon">📝</div>
-            <div class="sc-coach-text">
-              <h4>定制化简历</h4>
-              <p>根据目标岗位 JD 从零定制</p>
-            </div>
-          </div>
-          <div class="sc-coach-item">
-            <div class="sc-coach-icon">📖</div>
-            <div class="sc-coach-text">
-              <h4>定制化面经</h4>
-              <p>专属面试题库和应答话术</p>
-            </div>
-          </div>
-          <div class="sc-coach-item">
-            <div class="sc-coach-icon">🤝</div>
-            <div class="sc-coach-text">
-              <h4>大厂人脉内推</h4>
-              <p>在职校友直推 HR 面前</p>
-            </div>
-          </div>
-          <div class="sc-coach-item">
-            <div class="sc-coach-icon">🎤</div>
-            <div class="sc-coach-text">
-              <h4>模拟面试</h4>
-              <p>1v1 mock + 逐题复盘</p>
-            </div>
-          </div>
-          <div class="sc-coach-item">
-            <div class="sc-coach-icon">📊</div>
-            <div class="sc-coach-text">
-              <h4>定期复盘</h4>
-              <p>投递数据追踪 + 策略调整</p>
-            </div>
-          </div>
-          <div class="sc-coach-item">
-            <div class="sc-coach-icon">📋</div>
-            <div class="sc-coach-text">
-              <h4>全程监督投递</h4>
-              <p>制定计划 + 督促行动</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 </div>
 
-<!-- ===== RESUME CASES · 简历优化案例 ===== -->
+<!-- SHOWCASE -->
 <div class="section-wrapper">
-<div class="section-number">02</div>
-<section class="section" id="resume-cases">
-  <div class="section-inner">
-    <div class="section-label reveal">Resume Success</div>
-    <h2 class="section-title reveal reveal-delay-1">简历优化案例</h2>
-    <p class="section-desc reveal reveal-delay-2">改前改后真实对比，看看你的简历能怎么升级</p>
-    <div class="case-grid">
-      <!-- Case 1 -->
-      <div class="rcase-card reveal">
-        <div class="rcase-info">
-          <div class="rcase-student">🧑‍🎓 小陈 · 某双非本科</div>
-          <div class="rcase-meta">计算机专业 → 目标：互联网产品运营</div>
-          <div class="rcase-badges">
-            <span class="rcase-badge">投递回复率提升 4 倍</span>
-            <span class="rcase-badge">3 个 offer</span>
-            <span class="rcase-badge">月薪 12K</span>
-          </div>
-        </div>
-        <div class="rcase-compare">
-          <div class="rcase-side rcase-before">
-            <div class="rcase-label">❌ 优化前</div>
-            <div class="rcase-doc">
-              <div class="rdoc-header">个人简历</div>
-              <div class="rdoc-body">
-                <div class="rdoc-field">工作经历</div>
-                <div class="rdoc-line">· 2019-2021 XX公司 运营</div>
-                <div class="rdoc-line">· 负责公司运营工作，协助团队完成日常任务</div>
-                <div class="rdoc-line">· 参与项目，做一些基础工作</div>
-                <div class="rdoc-field">教育经历</div>
-                <div class="rdoc-line">· 某双非本科 计算机专业</div>
-                <div class="rdoc-field">自我评价</div>
-                <div class="rdoc-line">· 工作认真负责，学习能力强，有团队精神</div>
-              </div>
-            </div>
-            <div class="rcase-verdict rv-bad">
-              问题：<span class="rv-tag">描述笼统</span>
-              <span class="rv-tag">无数据支撑</span>
-              <span class="rv-tag">无关键词</span>
-            </div>
-          </div>
-          <div class="rcase-vs">→</div>
-          <div class="rcase-side rcase-after">
-            <div class="rcase-label">✅ 优化后</div>
-            <div class="rcase-doc rcase-doc-good">
-              <div class="rdoc-header">个人简历 · 求职意向：产品运营</div>
-              <div class="rdoc-body">
-                <div class="rdoc-field">产品运营 · XX公司 <span class="rdoc-hl">2019-2021</span></div>
-                <div class="rdoc-line rdoc-hiline">· 负责APP用户增长策略，3个月DAU提升<span class="rdoc-num">25%</span></div>
-                <div class="rdoc-line rdoc-hiline">· 搭建用户分层运营体系，留存率提升<span class="rdoc-num">18%</span></div>
-                <div class="rdoc-line rdoc-hiline">· 主导A/B测试12次，核心转化率优化<span class="rdoc-num">32%</span></div>
-                <div class="rdoc-field">核心技能匹配</div>
-                <div class="rdoc-line">
-                  <span class="rdoc-tag">📊数据分析</span>
-                  <span class="rdoc-tag">📈用户增长</span>
-                  <span class="rdoc-tag">🧪A/B测试</span>
-                </div>
-              </div>
-            </div>
-            <div class="rcase-verdict rv-good">
-              优化：<span class="rv-tag-good">STAR结构</span>
-              <span class="rv-tag-good">数据量化</span>
-              <span class="rv-tag-good">关键词匹配</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Case 2 -->
-      <div class="rcase-card reveal reveal-delay-1">
-        <div class="rcase-info">
-          <div class="rcase-student">🧑‍🎓 小张 · 某 211 本科</div>
-          <div class="rcase-meta">市场营销专业 → 目标：快消/电商品牌运营</div>
-          <div class="rcase-badges">
-            <span class="rcase-badge">投递回复率提升 3 倍</span>
-            <span class="rcase-badge">2 个 offer</span>
-            <span class="rcase-badge">月薪 15K</span>
-          </div>
-        </div>
-        <div class="rcase-compare">
-          <div class="rcase-side rcase-before">
-            <div class="rcase-label">❌ 优化前</div>
-            <div class="rcase-doc">
-              <div class="rdoc-header">简历</div>
-              <div class="rdoc-body">
-                <div class="rdoc-field">工作经历</div>
-                <div class="rdoc-line">· 2020-2022 XX公司 市场专员</div>
-                <div class="rdoc-line">· 负责市场活动的组织和执行</div>
-                <div class="rdoc-line">· 协助完成部门安排的各项工作</div>
-                <div class="rdoc-field">教育经历</div>
-                <div class="rdoc-line">· 211本科 市场营销专业</div>
-                <div class="rdoc-line">· 英语六级</div>
-              </div>
-            </div>
-            <div class="rcase-verdict rv-bad">
-              问题：<span class="rv-tag">JD不匹配</span>
-              <span class="rv-tag">缺乏成果</span>
-              <span class="rv-tag">无品牌感</span>
-            </div>
-          </div>
-          <div class="rcase-vs">→</div>
-          <div class="rcase-side rcase-after">
-            <div class="rcase-label">✅ 优化后</div>
-            <div class="rcase-doc rcase-doc-good">
-              <div class="rdoc-header">简历 · 目标岗位：品牌运营</div>
-              <div class="rdoc-body">
-                <div class="rdoc-field">品牌运营 · XX公司 <span class="rdoc-hl">2020-2022</span></div>
-                <div class="rdoc-line rdoc-hiline">· 策划12场品牌营销活动，场均曝光<span class="rdoc-num">50万+</span></div>
-                <div class="rdoc-line rdoc-hiline">· 运营小红书/抖音矩阵号，3个月涨粉<span class="rdoc-num">2万+</span></div>
-                <div class="rdoc-line rdoc-hiline">· 搭建KOL合作矩阵，单季ROI达<span class="rdoc-num">1:4.5</span></div>
-                <div class="rdoc-field">核心技能匹配</div>
-                <div class="rdoc-line">
-                  <span class="rdoc-tag">📱内容营销</span>
-                  <span class="rdoc-tag">🤝KOL管理</span>
-                  <span class="rdoc-tag">📊数据分析</span>
-                </div>
-              </div>
-            </div>
-            <div class="rcase-verdict rv-good">
-              优化：<span class="rv-tag-good">JD定向</span>
-              <span class="rv-tag-good">数据成果</span>
-              <span class="rv-tag-good">品牌思维</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Case 3 -->
-      <div class="rcase-card reveal">
-        <div class="rcase-info">
-          <div class="rcase-student">👩‍🎓 小李 · 普通二本</div>
-          <div class="rcase-meta">英语专业 → 目标：互联网社群运营</div>
-          <div class="rcase-badges">
-            <span class="rcase-badge">面试机会 6 个</span>
-            <span class="rcase-badge">2 个 offer</span>
-            <span class="rcase-badge">月薪 9K</span>
-          </div>
-        </div>
-        <div class="rcase-compare">
-          <div class="rcase-side rcase-before">
-            <div class="rcase-label">❌ 优化前</div>
-            <div class="rcase-doc">
-              <div class="rdoc-header">个人简历</div>
-              <div class="rdoc-body">
-                <div class="rdoc-field">工作经历</div>
-                <div class="rdoc-line">· XX教育机构 英语助教</div>
-                <div class="rdoc-line">· 辅助外教上课，管理课堂纪律</div>
-                <div class="rdoc-line">· 和家长沟通学生学习情况</div>
-                <div class="rdoc-field">教育经历</div>
-                <div class="rdoc-line">· 普通二本 英语专业</div>
-                <div class="rdoc-line">· 英语专业四级</div>
-              </div>
-            </div>
-            <div class="rcase-verdict rv-bad">
-              问题：<span class="rv-tag">跨行无关联</span>
-              <span class="rv-tag">缺乏亮点</span>
-              <span class="rv-tag">无运营经验</span>
-            </div>
-          </div>
-          <div class="rcase-vs">→</div>
-          <div class="rcase-side rcase-after">
-            <div class="rcase-label">✅ 优化后</div>
-            <div class="rcase-doc rcase-doc-good">
-              <div class="rdoc-header">简历 · 目标岗位：社群运营</div>
-              <div class="rdoc-body">
-                <div class="rdoc-field">用户运营 · XX机构 <span class="rdoc-hl">（转化相关经验）</span></div>
-                <div class="rdoc-line rdoc-hiline">· 维护200+学员社群，活跃度保持<span class="rdoc-num">85%+</span></div>
-                <div class="rdoc-line rdoc-hiline">· 策划社群活动12场，拉新转化率<span class="rdoc-num">23%</span></div>
-                <div class="rdoc-line rdoc-hiline">· 处理用户反馈500+条，满意度<span class="rdoc-num">95%</span></div>
-                <div class="rdoc-field">跨行优势挖掘</div>
-                <div class="rdoc-line">
-                  <span class="rdoc-tag">💬沟通能力强</span>
-                  <span class="rdoc-tag">👥社群管理</span>
-                  <span class="rdoc-tag">📈转化思维</span>
-                </div>
-              </div>
-            </div>
-            <div class="rcase-verdict rv-good">
-              优化：<span class="rv-tag-good">经验迁移</span>
-              <span class="rv-tag-good">数据化表达</span>
-              <span class="rv-tag-good">跨行话术</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Case 4 -->
-      <div class="rcase-card reveal reveal-delay-1">
-        <div class="rcase-info">
-          <div class="rcase-student">🧑‍🎓 小王 · 某双非本科</div>
-          <div class="rcase-meta">会计专业 → 目标：互联网数据分析</div>
-          <div class="rcase-badges">
-            <span class="rcase-badge">面试机会 8 个</span>
-            <span class="rcase-badge">3 个 offer</span>
-            <span class="rcase-badge">月薪 13K</span>
-          </div>
-        </div>
-        <div class="rcase-compare">
-          <div class="rcase-side rcase-before">
-            <div class="rcase-label">❌ 优化前</div>
-            <div class="rcase-doc">
-              <div class="rdoc-header">个人简历</div>
-              <div class="rdoc-body">
-                <div class="rdoc-field">工作经历</div>
-                <div class="rdoc-line">· XX公司 财务助理</div>
-                <div class="rdoc-line">· 负责记账、报税等日常工作</div>
-                <div class="rdoc-line">· 整理财务凭证和报表</div>
-                <div class="rdoc-field">教育经历</div>
-                <div class="rdoc-line">· 双非本科 会计专业</div>
-                <div class="rdoc-line">· 初级会计职称</div>
-              </div>
-            </div>
-            <div class="rcase-verdict rv-bad">
-              问题：<span class="rv-tag">方向不对口</span>
-              <span class="rv-tag">技能未展示</span>
-              <span class="rv-tag">无数据能力</span>
-            </div>
-          </div>
-          <div class="rcase-vs">→</div>
-          <div class="rcase-side rcase-after">
-            <div class="rcase-label">✅ 优化后</div>
-            <div class="rcase-doc rcase-doc-good">
-              <div class="rdoc-header">简历 · 目标岗位：数据分析师</div>
-              <div class="rdoc-body">
-                <div class="rdoc-field">数据处理 · XX公司 <span class="rdoc-hl">（数据相关经验）</span></div>
-                <div class="rdoc-line rdoc-hiline">· 用Excel/Python处理月均<span class="rdoc-num">5000+</span>条财务数据</div>
-                <div class="rdoc-line rdoc-hiline">· 搭建数据看板，报表效率提升<span class="rdoc-num">60%</span></div>
-                <div class="rdoc-line rdoc-hiline">· 通过异常数据检测发现<span class="rdoc-num">3次</span>账务偏差</div>
-                <div class="rdoc-field">数据分析技能</div>
-                <div class="rdoc-line">
-                  <span class="rdoc-tag">🐍Python</span>
-                  <span class="rdoc-tag">📊Excel</span>
-                  <span class="rdoc-tag">📉SQL</span>
-                  <span class="rdoc-tag">📋Tableau</span>
-                </div>
-              </div>
-            </div>
-            <div class="rcase-verdict rv-good">
-              优化：<span class="rv-tag-good">技能迁移</span>
-              <span class="rv-tag-good">工具展示</span>
-              <span class="rv-tag-good">数据成果</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<!-- ===== COACHING CASES · 求职陪跑案例 ===== -->
-<div class="section-wrapper">
-<div class="section-number">03</div>
-<section class="section section-alt" id="coach-cases">
-  <div class="section-inner">
-    <div class="section-label reveal">Coaching Success</div>
-    <h2 class="section-title reveal reveal-delay-1">求职陪跑案例</h2>
-    <p class="section-desc reveal reveal-delay-2">全程陪跑，从简历到 offer，每一步都有人带着走</p>
-    <div class="coach-grid">
-      <!-- Case 1 -->
-      <div class="ccase-card reveal">
-        <div class="ccase-top">
-          <div class="ccase-avatar" style="background:#FFF3E0">🧑‍🎓</div>
-          <div class="ccase-person">
-            <h3>小陈 · 某双非本科</h3>
-            <div class="ccase-target">计算机专业 → 产品运营</div>
-          </div>
-          <div class="ccase-salary">💰 月薪 12K</div>
-        </div>
-        <div class="ccase-body">
-          <p>刚毕业时投了 30+ 简历只有 2 个回复，非常焦虑。通过 <strong>3 个月陪跑服务</strong>，从简历重构到岗位匹配、面试 mock 到 offer 谈判全流程跟下来，<strong>最终拿到 3 个 offer</strong>，选择了某一线互联网公司产品运营岗。</p>
-        </div>
-        <div class="ccase-metrics">
-          <div class="ccase-metric"><span class="ccase-val">2 → 12</span><span class="ccase-lbl">投递回复</span></div>
-          <div class="ccase-metric"><span class="ccase-val">3</span><span class="ccase-lbl">Offer 数</span></div>
-          <div class="ccase-metric"><span class="ccase-val">60%</span><span class="ccase-lbl">薪资涨幅</span></div>
-          <div class="ccase-metric"><span class="ccase-val">8 周</span><span class="ccase-lbl">上岸周期</span></div>
-        </div>
-        <div class="ccase-services">
-          <span class="cs-tag">简历定制</span>
-          <span class="cs-tag">面经定制</span>
-          <span class="cs-tag">模拟面试x5</span>
-          <span class="cs-tag">内推投递</span>
-        </div>
-      </div>
-
-      <!-- Case 2 -->
-      <div class="ccase-card reveal reveal-delay-1">
-        <div class="ccase-top">
-          <div class="ccase-avatar" style="background:#E8F5E9">🧑‍🎓</div>
-          <div class="ccase-person">
-            <h3>小张 · 某 211 本科</h3>
-            <div class="ccase-target">市场营销 → 品牌运营</div>
-          </div>
-          <div class="ccase-salary">💰 月薪 15K</div>
-        </div>
-        <div class="ccase-body">
-          <p>211 毕业但简历投出去石沉大海。通过 <strong>简历深度优化</strong>重新定位品牌运营方向，配合 <strong>8 轮 1v1 面试辅导</strong>，从自我介绍到专业面逐题打磨，最终拿下某头部跨境电商品牌运营 offer，<strong>薪资涨幅超预期</strong>。</p>
-        </div>
-        <div class="ccase-metrics">
-          <div class="ccase-metric"><span class="ccase-val">5 → 12</span><span class="ccase-lbl">回复数</span></div>
-          <div class="ccase-metric"><span class="ccase-val">5</span><span class="ccase-lbl">面试机会</span></div>
-          <div class="ccase-metric"><span class="ccase-val">2</span><span class="ccase-lbl">Offer 数</span></div>
-          <div class="ccase-metric"><span class="ccase-val">6 周</span><span class="ccase-lbl">上岸周期</span></div>
-        </div>
-        <div class="ccase-services">
-          <span class="cs-tag">简历优化</span>
-          <span class="cs-tag">面试辅导x8</span>
-          <span class="cs-tag">面经定制</span>
-          <span class="cs-tag">offer谈判</span>
-        </div>
-      </div>
-
-      <!-- Case 3 -->
-      <div class="ccase-card reveal">
-        <div class="ccase-top">
-          <div class="ccase-avatar" style="background:#FCE4EC">👩‍🎓</div>
-          <div class="ccase-person">
-            <h3>小李 · 普通二本</h3>
-            <div class="ccase-target">英语专业 → 社群运营（转岗）</div>
-          </div>
-          <div class="ccase-salary">💰 月薪 9K</div>
-        </div>
-        <div class="ccase-body">
-          <p>英语专业跨行求职，零运营经验，一开始完全不知道怎么写简历。通过 <strong>转岗陪跑服务</strong>，深入挖掘过往经历中的可迁移能力，重新包装成运营视角的表达。配合 <strong>社群运营专项面试训练</strong>，2 个月内拿到互联网公司社群运营岗 offer。</p>
-        </div>
-        <div class="ccase-metrics">
-          <div class="ccase-metric"><span class="ccase-val">0 → 6</span><span class="ccase-lbl">面试机会</span></div>
-          <div class="ccase-metric"><span class="ccase-val">2</span><span class="ccase-lbl">Offer 数</span></div>
-          <div class="ccase-metric"><span class="ccase-val">30%</span><span class="ccase-lbl">薪资涨幅</span></div>
-          <div class="ccase-metric"><span class="ccase-val">8 周</span><span class="ccase-lbl">上岸周期</span></div>
-        </div>
-        <div class="ccase-services">
-          <span class="cs-tag">转岗策略</span>
-          <span class="cs-tag">简历重构</span>
-          <span class="cs-tag">专项面试</span>
-          <span class="cs-tag">经验迁移</span>
-        </div>
-      </div>
-
-      <!-- Case 4 -->
-      <div class="ccase-card reveal reveal-delay-1">
-        <div class="ccase-top">
-          <div class="ccase-avatar" style="background:#E3F2FD">🧑‍🎓</div>
-          <div class="ccase-person">
-            <h3>小王 · 某双非本科</h3>
-            <div class="ccase-target">会计 → 数据分析师（转岗）</div>
-          </div>
-          <div class="ccase-salary">💰 月薪 13K</div>
-        </div>
-        <div class="ccase-body">
-          <p>会计专业想做数据分析，但投了 40 多份简历全被拒。加入 <strong>转岗陪跑计划</strong>后，先做技能诊断和方向定位，然后针对性补充 SQL/Python 项目经验到简历中。经过 <strong>6 轮模拟面试+复盘</strong>，最终拿到 3 个数据分析岗 offer，薪资比原财务岗位 <strong>提升了 60%</strong>。</p>
-        </div>
-        <div class="ccase-metrics">
-          <div class="ccase-metric"><span class="ccase-val">0 → 8</span><span class="ccase-lbl">面试机会</span></div>
-          <div class="ccase-metric"><span class="ccase-val">3</span><span class="ccase-lbl">Offer 数</span></div>
-          <div class="ccase-metric"><span class="ccase-val">60%</span><span class="ccase-lbl">薪资涨幅</span></div>
-          <div class="ccase-metric"><span class="ccase-val">10 周</span><span class="ccase-lbl">上岸周期</span></div>
-        </div>
-        <div class="ccase-services">
-          <span class="cs-tag">技能诊断</span>
-          <span class="cs-tag">项目包装</span>
-          <span class="cs-tag">模拟面试x6</span>
-          <span class="cs-tag">全程监督</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<!-- ===== SERVICES · 求职服务 ===== -->
-<div class="section-wrapper">
-<div class="section-number">04</div>
-<section class="section section-alt" id="services">
+<section class="section" id="showcase">
   <div class="section-inner">
     <div class="section-label reveal">Services</div>
-    <h2 class="section-title reveal reveal-delay-1">我的求职服务</h2>
-    <p class="section-desc reveal reveal-delay-2">简历按需求分 2 档，陪跑从 0 到 1 全程护航，价格一步到位</p>
-    <div class="cards-grid">
-      <div class="notion-card reveal">
-        <div class="nc-icon" style="background:#FEF3C7;color:#D97706">📄</div>
-        <h3>简历精修 <span class="nc-badge nc-badge-new">¥128</span></h3>
-        <p>适合已经有初稿的同学。帮你优化排版、润色措辞，让简历看起来更专业。</p>
-        <ul >
-          <li>格式排版优化</li>
-          <li>措辞润色建议</li>
-          <li>1 轮修改 · 2 个工作日内</li>
-        </ul>
-        <div class="nc-price">
-          <span class="price">¥128 <small>一次性</small></span>
-          <a href="#" class="nc-btn nc-btn-outline" style="padding:0.4rem 1.2rem;font-size:0.82rem">选这个</a>
+    <h2 class="section-title reveal d1">服务展示</h2>
+    <p class="section-desc reveal d2">看看我能帮你做什么，每个服务都看得见效果</p>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="icon" style="background:#FEF3C7;color:#D97706">📄</div>
+        <h3>简历优化</h3>
+        <p class="desc">从排版到内容到关键词，打磨职场第一张名片</p>
+        <div class="sc-resume" style="display:grid;grid-template-columns:1fr auto 1fr;gap:.3rem;font-size:.65rem;margin-bottom:.7rem">
+          <div class="case-side bf">
+            <span class="lbl clr-bad">❌ 优化前</span>
+            <div class="case-doc">
+              <div class="dh">个人简历</div>
+              <div class="db">
+                <div class="df">工作经历</div>
+                <div class="dl">· 负责公司运营工作</div>
+                <div class="dl">· 协助团队完成日常任务</div>
+                <div class="df">自我评价</div>
+                <div class="dl">· 工作认真负责</div>
+              </div>
+            </div>
+            <div class="tags"><span class="t tb">✗ 排版混乱</span><span class="t tb">✗ 没有数据</span></div>
+          </div>
+          <div class="case-vs">→</div>
+          <div class="case-side af">
+            <span class="lbl clr-good">✅ 优化后</span>
+            <div class="case-doc" style="border-color:#C6F6D5">
+              <div class="dh">个人简历 · 目标：产品运营</div>
+              <div class="db">
+                <div class="df">产品运营 · XX公司</div>
+                <div class="dl">· <span class="clr-num">DAU提升25%</span></div>
+                <div class="dl">· 搭建分层运营体系</div>
+                <div class="tags" style="margin-top:2px"><span class="t tblue">用户增长</span><span class="t tblue">数据分析</span></div>
+              </div>
+            </div>
+            <div class="tags"><span class="t tg">✓ 数据驱动</span><span class="t tg">✓ 关键词优化</span></div>
+          </div>
         </div>
       </div>
-      <div class="notion-card reveal reveal-delay-1">
-        <div class="nc-icon" style="background:#D1FAE5;color:#059669">🏆</div>
-        <h3>简历定制 <span class="nc-badge nc-badge-popular" style="background:linear-gradient(135deg,var(--gold-2),var(--gold));color:var(--white)">最受欢迎</span></h3>
-        <p>从零到一全流程定制，深度挖掘你的经历亮点，帮你打造一份让 HR 眼前一亮的简历。</p>
-        <ul >
+      <div class="card reveal d1">
+        <div class="icon" style="background:#D1FAE5;color:#059669">🏆</div>
+        <h3>简历定制 <span class="badge badge-popular">最受欢迎</span></h3>
+        <p class="desc">从零到一全流程定制，深度挖掘你的经历亮点。</p>
+        <ul>
           <li>从零到一定制简历</li>
           <li>针对简历定制面经</li>
           <li>职业规划梳理</li>
           <li>含1次修改 · 1v1深入沟通</li>
         </ul>
-        <div class="nc-price">
+        <div class="price-row">
           <span class="price">¥258 <small>一次性</small></span>
-          <a href="#" class="nc-btn nc-btn-primary" style="padding:0.4rem 1.2rem;font-size:0.82rem">选这个</a>
+          <button class="card-btn primary">选这个</button>
         </div>
       </div>
-      <div class="notion-card reveal reveal-delay-2">
-        <div class="nc-icon" style="background:#FFF3E0;color:#E65100">🎯</div>
-        <h3>实习陪跑 <span class="nc-badge nc-badge-new">¥499</span></h3>
-        <p>在校生从 0 到实习 offer 的全流程陪跑，一站式搞定。</p>
-        <ul >
+      <div class="card reveal d1">
+        <div class="icon" style="background:#FFF3E0;color:#E65100">🎯</div>
+        <h3>实习陪跑 <span class="badge badge-new">¥499</span></h3>
+        <p class="desc">在校生从 0 到实习 offer 的全流程陪跑。</p>
+        <ul>
           <li>定制化简历 + 定制化面经</li>
           <li>职业规划确认</li>
           <li>模拟面试 + 定期复盘</li>
           <li>全程监督投递</li>
         </ul>
-        <div class="nc-price">
+        <div class="price-row">
           <span class="price">¥499 <small>拿到实习为止</small></span>
-          <a href="#" class="nc-btn nc-btn-primary" style="padding:0.4rem 1.2rem;font-size:0.82rem">选这个</a>
+          <button class="card-btn primary">选这个</button>
         </div>
       </div>
-      <div class="notion-card reveal reveal-delay-1">
-        <div class="nc-icon" style="background:#FCE4EC;color:#C62828">💫</div>
-        <h3>转岗陪跑 <span class="nc-badge nc-badge-new">¥599+30%</span></h3>
-        <p>想换赛道/转行从 0 到上岸，成功转岗后付 30% offer 薪资。</p>
-        <ul >
+      <div class="card reveal d2">
+        <div class="icon" style="background:#FCE4EC;color:#C62828">💫</div>
+        <h3>转岗陪跑 <span class="badge badge-popular">¥599+30%</span></h3>
+        <p class="desc">想换赛道/转行从 0 到上岸。</p>
+        <ul>
           <li>定制化简历 + 定制化面经</li>
           <li>大厂人脉内推</li>
           <li>模拟面试 + 定期复盘</li>
           <li>全程监督投递 + 不成功不收费</li>
         </ul>
-        <div style="margin-top:0.6rem;padding:0.5rem;border-radius:8px;background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1px solid #FFE082;font-size:0.8rem;color:#E65100;line-height:1.5">
-          <strong>📌 目前开放岗位：</strong>投放、运营、媒介市场
-        </div>
-        <div class="nc-price">
+        <div class="price-row">
           <span class="price">¥599 <small>+ 30% offer薪资</small></span>
-          <a href="#" class="nc-btn nc-btn-primary" style="padding:0.4rem 1.2rem;font-size:0.82rem">选这个</a>
+          <button class="card-btn">选这个</button>
+        </div>
+        <div class="note"><strong>📌 目前开放岗位：</strong>投放、运营、媒介市场</div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- RESUME CASES -->
+<div class="section-wrapper">
+<section class="section section-alt" id="resume-cases">
+  <div class="section-inner">
+    <div class="section-label reveal">Resume Cases</div>
+    <h2 class="section-title reveal d1">简历优化案例</h2>
+    <p class="section-desc reveal d2">看看简历优化前后的真实对比</p>
+    <div class="case-grid">
+      <div class="case-card reveal">
+        <h4>小陈 · 产品运营</h4>
+        <div class="meta">双非本科 · 目标：互联网大厂产品岗</div>
+        <div class="case-result">✅ 拿到字节跳动 offer</div>
+        <div class="case-compare">
+          <div class="case-side bf">
+            <span class="lbl clr-bad">❌ 修改前</span>
+            <div class="case-doc"><div class="dh">个人简历</div><div class="db"><div class="dl">· 负责产品运营工作</div><div class="dl">· 协助完成产品需求</div></div></div>
+          </div>
+          <div class="case-vs">→</div>
+          <div class="case-side af">
+            <span class="lbl clr-good">✅ 修改后</span>
+            <div class="case-doc" style="border-color:#C6F6D5"><div class="dh">产品运营 · 目标：B端产品</div><div class="db"><div class="dl">· 推动<span class="clr-num">3个功能</span>上线</div><div class="dl">· <span class="clr-num">用户留存+15%</span></div></div></div>
+            <div class="tags"><span class="t tg">数据量化</span><span class="t tg">关键词优化</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal d1">
+        <h4>小李 · 市场营销</h4>
+        <div class="meta">普通一本 · 目标：快消市场岗</div>
+        <div class="case-result">✅ 拿到宝洁 offer</div>
+        <div class="case-compare">
+          <div class="case-side bf">
+            <span class="lbl clr-bad">❌ 修改前</span>
+            <div class="case-doc"><div class="dh">个人简历</div><div class="db"><div class="dl">· 负责市场活动执行</div></div></div>
+          </div>
+          <div class="case-vs">→</div>
+          <div class="case-side af">
+            <span class="lbl clr-good">✅ 修改后</span>
+            <div class="case-doc" style="border-color:#C6F6D5"><div class="dh">市场营销 · 目标：品牌岗</div><div class="db"><div class="dl">· 策划<span class="clr-num">5场</span>活动</div><div class="dl">· 覆盖<span class="clr-num">2000+</span>人次</div></div></div>
+            <div class="tags"><span class="t tg">成果量化</span><span class="t tblue">活动策划</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal">
+        <h4>小王 · Java开发</h4>
+        <div class="meta">二本 · 目标：中厂开发岗</div>
+        <div class="case-result">✅ 拿到美团 offer</div>
+        <div class="case-compare">
+          <div class="case-side bf">
+            <span class="lbl clr-bad">❌ 修改前</span>
+            <div class="case-doc"><div class="dh">个人简历</div><div class="db"><div class="dl">· 熟悉Java、MySQL</div></div></div>
+          </div>
+          <div class="case-vs">→</div>
+          <div class="case-side af">
+            <span class="lbl clr-good">✅ 修改后</span>
+            <div class="case-doc" style="border-color:#C6F6D5"><div class="dh">后端开发 · 目标：Java岗</div><div class="db"><div class="dl">· 项目：<span class="clr-blue">高并发秒杀系统</span></div><div class="dl">· QPS提升<span class="clr-num">300%</span></div></div></div>
+            <div class="tags"><span class="t tg">技术亮点</span><span class="t tblue">高并发</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal d1">
+        <h4>小张 · 内容运营</h4>
+        <div class="meta">三本 · 目标：新媒体方向</div>
+        <div class="case-result">✅ 拿到小红书 offer</div>
+        <div class="case-compare">
+          <div class="case-side bf">
+            <span class="lbl clr-bad">❌ 修改前</span>
+            <div class="case-doc"><div class="dh">个人简历</div><div class="db"><div class="dl">· 负责公众号运营</div></div></div>
+          </div>
+          <div class="case-vs">→</div>
+          <div class="case-side af">
+            <span class="lbl clr-good">✅ 修改后</span>
+            <div class="case-doc" style="border-color:#C6F6D5"><div class="dh">内容运营 · 目标：新媒体</div><div class="db"><div class="dl">· 公众号涨粉<span class="clr-num">5000+</span></div><div class="dl">· 产出<span class="clr-num">10W+</span>爆款文章</div></div></div>
+            <div class="tags"><span class="t tg">数据驱动</span><span class="t tg">爆款能力</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1239,359 +408,198 @@ a:hover{color:var(--accent-hover)}
 </section>
 </div>
 
-<!-- ===== CTA ===== -->
-<section class="cta-section">
-  <div class="reveal">
-    <h2>别让好工作从手里溜走</h2>
-    <p>每天只有 5 个免费诊断名额，先到先得</p>
-    <a href="#hero" class="hero-cta" style="display:inline-flex">立即预约诊断</a>
+<!-- COACHING CASES -->
+<div class="section-wrapper">
+<section class="section" id="coach-cases">
+  <div class="section-inner">
+    <div class="section-label reveal">Coaching Cases</div>
+    <h2 class="section-title reveal d1">求职陪跑案例</h2>
+    <p class="section-desc reveal d2">从 0 到 offer，全程陪跑的真实成果</p>
+    <div class="coach-grid">
+      <div class="coach-card reveal">
+        <div class="c-top">
+          <div class="c-avatar" style="background:#FFF3E0;color:#E65100">👜</div>
+          <div class="c-info">
+            <h4>圆圆 · 产品运营</h4>
+            <div class="ct">目标：产品运营 → 拿到小红书 offer</div>
+          </div>
+          <div class="c-salary">+36%</div>
+        </div>
+        <div class="c-body">
+          <p>从 0 开始系统辅导，简历重做 + 面试对练 + 行业认知提升，<strong style="color:var(--blue)">36%</strong>的涨幅拿下满意 offer。</p>
+        </div>
+        <div class="c-metrics">
+          <div class="c-metric"><span class="cv">0→12</span><span class="cl">投递数</span></div>
+          <div class="c-metric"><span class="cv">0→32</span><span class="cl">面试机会</span></div>
+          <div class="c-metric"><span class="cv">0→6</span><span class="cl">Offer数</span></div>
+          <div class="c-metric"><span class="cv">36%</span><span class="cl">涨幅</span></div>
+        </div>
+        <div class="c-services">
+          <span class="c-s-tag">简历优化</span>
+          <span class="c-s-tag">面试陪练</span>
+          <span class="c-s-tag">全程投递</span>
+        </div>
+      </div>
+      <div class="coach-card reveal d1">
+        <div class="c-top">
+          <div class="c-avatar" style="background:#E8F5E9;color:#2E7D32">🎯</div>
+          <div class="c-info">
+            <h4>小马 · 市场营销</h4>
+            <div class="ct">目标：市场营销 → 拿到字节跳动 offer</div>
+          </div>
+          <div class="c-salary">+42%</div>
+        </div>
+        <div class="c-body">
+          <p>从 0 开始系统辅导，简历重做 + 面试对练 + 行业认知提升，<strong style="color:var(--blue)">42%</strong>的涨幅拿下满意 offer。</p>
+        </div>
+        <div class="c-metrics">
+          <div class="c-metric"><span class="cv">0→8</span><span class="cl">投递数</span></div>
+          <div class="c-metric"><span class="cv">0→24</span><span class="cl">面试机会</span></div>
+          <div class="c-metric"><span class="cv">0→3</span><span class="cl">Offer数</span></div>
+          <div class="c-metric"><span class="cv">42%</span><span class="cl">涨幅</span></div>
+        </div>
+        <div class="c-services">
+          <span class="c-s-tag">简历优化</span>
+          <span class="c-s-tag">面试陪练</span>
+          <span class="c-s-tag">全程投递</span>
+        </div>
+      </div>
+      <div class="coach-card reveal">
+        <div class="c-top">
+          <div class="c-avatar" style="background:#E3F2FD;color:#1565C0">💻</div>
+          <div class="c-info">
+            <h4>阿杰 · Java开发</h4>
+            <div class="ct">目标：Java开发 → 拿到美团 offer</div>
+          </div>
+          <div class="c-salary">+28%</div>
+        </div>
+        <div class="c-body">
+          <p>从 0 开始系统辅导，简历重做 + 面试对练 + 行业认知提升，<strong style="color:var(--blue)">28%</strong>的涨幅拿下满意 offer。</p>
+        </div>
+        <div class="c-metrics">
+          <div class="c-metric"><span class="cv">0→15</span><span class="cl">投递数</span></div>
+          <div class="c-metric"><span class="cv">0→40</span><span class="cl">面试机会</span></div>
+          <div class="c-metric"><span class="cv">0→8</span><span class="cl">Offer数</span></div>
+          <div class="c-metric"><span class="cv">28%</span><span class="cl">涨幅</span></div>
+        </div>
+        <div class="c-services">
+          <span class="c-s-tag">简历优化</span>
+          <span class="c-s-tag">面试陪练</span>
+          <span class="c-s-tag">全程投递</span>
+        </div>
+      </div>
+      <div class="coach-card reveal d1">
+        <div class="c-top">
+          <div class="c-avatar" style="background:#FCE4EC;color:#C62828">📝</div>
+          <div class="c-info">
+            <h4>小月 · 内容运营</h4>
+            <div class="ct">目标：内容运营 → 拿到网易 offer</div>
+          </div>
+          <div class="c-salary">+31%</div>
+        </div>
+        <div class="c-body">
+          <p>从 0 开始系统辅导，简历重做 + 面试对练 + 行业认知提升，<strong style="color:var(--blue)">31%</strong>的涨幅拿下满意 offer。</p>
+        </div>
+        <div class="c-metrics">
+          <div class="c-metric"><span class="cv">0→10</span><span class="cl">投递数</span></div>
+          <div class="c-metric"><span class="cv">0→28</span><span class="cl">面试机会</span></div>
+          <div class="c-metric"><span class="cv">0→5</span><span class="cl">Offer数</span></div>
+          <div class="c-metric"><span class="cv">31%</span><span class="cl">涨幅</span></div>
+        </div>
+        <div class="c-services">
+          <span class="c-s-tag">简历优化</span>
+          <span class="c-s-tag">面试陪练</span>
+          <span class="c-s-tag">全程投递</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+</div>
 
-<!-- ===== Footer ===== -->
-<footer style="background:var(--gray-1);color:var(--gray-4);text-align:center;padding:1.5rem 2rem;font-size:0.82rem">
-  <p>© 2026 Alex · 大学生求职辅导 · 用心帮你上岸</p>
-</footer>
+<!-- PROCESS -->
+<div class="section-wrapper">
+<section class="section section-alt" id="process">
+  <div class="section-inner">
+    <div class="section-label reveal">Process</div>
+    <h2 class="section-title reveal d1">服务流程</h2>
+    <p class="section-desc reveal d2">简单四步，从零到 offer</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>初步沟通</h4>
+          <p>了解你的背景、目标、痛点，制定个性化方案</p>
+        </div>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>服务执行</h4>
+          <p>简历优化、面试对练、投递监督，全程陪跑</p>
+        </div>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>持续迭代</h4>
+          <p>根据反馈不断调整，直到达到目标</p>
+        </div>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>拿到 Offer</h4>
+          <p>协助谈薪、入职跟进，确保满意结果</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <h2 class="reveal">开始你的求职之旅</h2>
+  <p class="reveal d1">别让自己一个人硬扛，让我帮你一起搞定</p>
+  <a href="https://wpa.qq.com/msgrd?v=3&uin=123456789&site=qq&menu=yes" class="btn reveal d2" target="_blank">联系我</a>
+</div>
 
 <script>
-// ===== Progress Bar =====
-(function(){
-  const bar = document.getElementById('progressBar');
-  const updateProgress = () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    bar.style.width = progress + '%';
-  };
-  window.addEventListener('scroll', updateProgress, {passive:true});
-  window.addEventListener('resize', updateProgress, {passive:true});
-  updateProgress();
-})();
+// Progress bar
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollH = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = scrollH > 0 ? (scrollTop / scrollH * 100) + '%' : '0%';
+});
 
-// ===== Scroll Reveal =====
-(function(){
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  document.querySelectorAll('.reveal, .reveal-right').forEach(el => observer.observe(el));
-})();
-
-// ===== CountUp =====
-(function(){
-  const countups = document.querySelectorAll('.countup');
-  if (!countups.length) return;
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-target'), 10);
-        if (prefersReducedMotion) {
-          el.textContent = target;
-          observer.unobserve(el);
-          return;
-        }
-        animateCountUp(el, target);
-        observer.unobserve(el);
-      }
-    });
-  }, {threshold: 0.5});
-
-  countups.forEach(el => observer.observe(el));
-
-  function animateCountUp(el, target){
-    const duration = 2000;
-    const startTime = performance.now();
-    const step = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * target);
-      el.textContent = current;
-      if(progress < 1){
-        requestAnimationFrame(step);
-      } else {
-        el.textContent = target;
-      }
-    };
-    requestAnimationFrame(step);
-  }
-})();
-
-// ===== Hero Canvas Animation (Video-Grade Dynamic) =====
-(function(){
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(prefersReducedMotion) return;
-
-  const canvas = document.getElementById('heroCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, time = 0;
-
-  function resize(){
-    W = canvas.width = canvas.parentElement.offsetWidth;
-    H = canvas.height = canvas.parentElement.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // ─────────── LAYER 1: Fast Glow Particles ───────────
-  const glowParticles = [];
-  const GP_COUNT = 120;
-  for(let i=0;i<GP_COUNT;i++){
-    glowParticles.push({
-      x: Math.random()*W, y: Math.random()*H,
-      vx: (Math.random()-0.5)*0.6, vy: -0.3 - Math.random()*1.2,
-      size: 1.5 + Math.random()*3.5,
-      life: Math.random(), lifeSpeed: 0.002 + Math.random()*0.005,
-      hue: 210 + Math.random()*30 // blue range
-    });
-  }
-
-  // ─────────── LAYER 2: Shooting Stars ───────────
-  const shootingStars = [];
-  function spawnShootingStar(){
-    shootingStars.push({
-      x: Math.random()*W, y: Math.random()*H*0.5,
-      vx: 2 + Math.random()*4, vy: 3 + Math.random()*5,
-      life: 1, decay: 0.008 + Math.random()*0.012,
-      len: 40 + Math.random()*80,
-      width: 1.5 + Math.random()*2
-    });
-  }
-  // initial bursts
-  for(let i=0;i<3;i++) setTimeout(()=>spawnShootingStar(), i*400);
-
-  // ─────────── LAYER 3: Pulse Rings ───────────
-  const pulseRings = [];
-  function spawnPulse(){
-    pulseRings.push({
-      x: Math.random()*W, y: H*0.3 + Math.random()*H*0.4,
-      radius: 0, maxRadius: 80 + Math.random()*150,
-      speed: 0.8 + Math.random()*1.2,
-      life: 1, decay: 0.005 + Math.random()*0.008,
-      width: 1 + Math.random()*2
-    });
-  }
-  for(let i=0;i<3;i++) setTimeout(()=>spawnPulse(), i*600);
-
-  // ─────────── LAYER 4: Dynamic Light Rays ───────────
-  const rays = [
-    { angle: -0.3, speed: 0.08, width: 120, opacity: 0.04 },
-    { angle: 0.5, speed: -0.05, width: 180, opacity: 0.03 },
-    { angle: -0.1, speed: 0.12, width: 90, opacity: 0.05 }
-  ];
-  let rayOffset = 0;
-
-  // ─────────── LAYER 5: Floating Icons (with trails) ───────────
-  const ICONS = ['resume','cap','case','envelope','arrow','star'];
-  const ICON_COUNT = 18;
-  const iconFloats = [];
-  for(let i=0;i<ICON_COUNT;i++){
-    iconFloats.push({
-      type: ICONS[i % ICONS.length],
-      x: Math.random()*W, y: Math.random()*H,
-      size: 18 + Math.random()*28,
-      speed: 0.4 + Math.random()*1.0,
-      wobble: Math.random()*Math.PI*2,
-      wobbleSpeed: 0.008 + Math.random()*0.015,
-      wobbleAmp: 15 + Math.random()*25,
-      rotation: (Math.random()-0.5)*0.3,
-      rotSpeed: (Math.random()-0.5)*0.005,
-      opacity: 0.15 + Math.random()*0.25,
-      trail: []
-    });
-  }
-
-  // ─────────── Draw Icon Helper ───────────
-  function drawIcon(ctx, type, s, color, lineW){
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lineW;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    switch(type){
-      case 'resume':
-        ctx.strokeRect(-s/2, -s*0.65, s, s*1.3);
-        for(let i=0;i<3;i++){
-          const ly = -s*0.35 + i*s*0.2;
-          ctx.beginPath(); ctx.moveTo(-s*0.35, ly); ctx.lineTo(s*0.35, ly); ctx.stroke();
-        }
-        ctx.beginPath(); ctx.moveTo(-s*0.25, -s*0.35+3*s*0.2); ctx.lineTo(s*0.2, -s*0.35+3*s*0.2); ctx.stroke();
-        break;
-      case 'cap':
-        ctx.beginPath(); ctx.moveTo(-s*0.5,-s*0.15); ctx.lineTo(0,-s*0.5); ctx.lineTo(s*0.5,-s*0.15); ctx.lineTo(0,s*0.05); ctx.closePath(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0,s*0.05); ctx.lineTo(s*0.2,s*0.35); ctx.stroke();
-        ctx.beginPath(); ctx.arc(s*0.2,s*0.35,2,0,Math.PI*2); ctx.fillStyle=color; ctx.fill();
-        break;
-      case 'case':
-        ctx.strokeRect(-s*0.4,-s*0.25,s*0.8,s*0.55);
-        ctx.beginPath(); ctx.moveTo(-s*0.15,-s*0.25); ctx.lineTo(-s*0.15,-s*0.38); ctx.lineTo(s*0.15,-s*0.38); ctx.lineTo(s*0.15,-s*0.25); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(-s*0.04,0); ctx.lineTo(s*0.04,0); ctx.stroke();
-        break;
-      case 'envelope':
-        ctx.strokeRect(-s*0.45,-s*0.3,s*0.9,s*0.6);
-        ctx.beginPath(); ctx.moveTo(-s*0.45,-s*0.3); ctx.lineTo(0,s*0.02); ctx.lineTo(s*0.45,-s*0.3); ctx.stroke();
-        break;
-      case 'arrow':
-        ctx.beginPath(); ctx.moveTo(0,s*0.4); ctx.lineTo(0,-s*0.3); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0,-s*0.3); ctx.lineTo(-s*0.25,-s*0.05); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0,-s*0.3); ctx.lineTo(s*0.25,-s*0.05); ctx.stroke();
-        break;
-      case 'star':
-        ctx.beginPath();
-        for(let i=0;i<5;i++){
-          const a=-Math.PI/2+i*2*Math.PI/5,ia=a+Math.PI/5;
-          if(i===0) ctx.moveTo(Math.cos(a)*s*0.35,Math.sin(a)*s*0.35);
-          else ctx.lineTo(Math.cos(a)*s*0.35,Math.sin(a)*s*0.35);
-          ctx.lineTo(Math.cos(ia)*s*0.15,Math.sin(ia)*s*0.15);
-        }
-        ctx.closePath(); ctx.fillStyle=color; ctx.fill(); ctx.stroke();
-        break;
+// CountUp
+const countups = document.querySelectorAll('.countup');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const timer = setInterval(() => {
+        current += step;
+        if(current >= target) { current = target; clearInterval(timer); }
+        el.textContent = current;
+      }, 25);
+      countObserver.unobserve(el);
     }
-  }
-
-  // ─────────── Main Animation Loop ───────────
-  function animate(){
-    time++;
-    ctx.clearRect(0, 0, W, H);
-
-    // ── Layer: Dynamic Light Rays ──
-    rayOffset += 0.3;
-    for(const ray of rays){
-      ctx.save();
-      ctx.globalAlpha = ray.opacity;
-      const gradient = ctx.createLinearGradient(
-        W * (0.5 + Math.sin(rayOffset * ray.speed + ray.angle) * 0.5), 0,
-        W * (0.5 + Math.sin(rayOffset * ray.speed + ray.angle + 0.5) * 0.5), H
-      );
-      gradient.addColorStop(0, 'rgba(148,191,255,0)');
-      gradient.addColorStop(0.3, 'rgba(148,191,255,0.15)');
-      gradient.addColorStop(0.5, 'rgba(255,255,255,0.12)');
-      gradient.addColorStop(0.7, 'rgba(148,191,255,0.15)');
-      gradient.addColorStop(1, 'rgba(148,191,255,0)');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, W, H);
-      ctx.restore();
-    }
-
-    // ── Layer: Glow Particles ──
-    for(const p of glowParticles){
-      p.x += p.vx + Math.sin(time * 0.005 + p.x * 0.01) * 0.3;
-      p.y += p.vy;
-      p.life += p.lifeSpeed;
-      if(p.life > 1 || p.y < -10 || p.x < -10 || p.x > W+10){
-        p.x = Math.random()*W; p.y = H + 5;
-        p.life = 0;
-      }
-      const alpha = Math.sin(p.life * Math.PI) * 0.6;
-      // glow effect
-      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
-      grad.addColorStop(0, `rgba(148,191,255,${alpha*0.3})`);
-      grad.addColorStop(0.3, `rgba(148,191,255,${alpha*0.1})`);
-      grad.addColorStop(1, `rgba(148,191,255,0)`);
-      ctx.fillStyle = grad;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI*2); ctx.fill();
-      // core
-      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI*2); ctx.fill();
-    }
-
-    // ── Layer: Shooting Stars ──
-    for(let i=shootingStars.length-1;i>=0;i--){
-      const s = shootingStars[i];
-      s.x += s.vx; s.y += s.vy;
-      s.life -= s.decay;
-      if(s.life <= 0 || s.x > W+100 || s.y > H+100){
-        shootingStars.splice(i,1);
-        continue;
-      }
-      ctx.save();
-      ctx.globalAlpha = s.life * 0.7;
-      const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.vx/s.vy*s.len, s.y - s.len);
-      grad.addColorStop(0, 'rgba(180,215,255,0.8)');
-      grad.addColorStop(0.3, 'rgba(148,191,255,0.3)');
-      grad.addColorStop(1, 'rgba(148,191,255,0)');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = s.width;
-      ctx.beginPath();
-      ctx.moveTo(s.x, s.y);
-      const endX = s.x - s.vx/s.vy * s.len;
-      ctx.lineTo(endX, s.y - s.len);
-      ctx.stroke();
-      ctx.restore();
-    }
-
-    // ── Layer: Pulse Rings ──
-    for(let i=pulseRings.length-1;i>=0;i--){
-      const r = pulseRings[i];
-      r.radius += r.speed;
-      r.life -= r.decay;
-      if(r.life <= 0 || r.radius > r.maxRadius){
-        pulseRings.splice(i,1);
-        continue;
-      }
-      ctx.save();
-      ctx.globalAlpha = r.life * 0.25;
-      ctx.strokeStyle = 'rgba(148,191,255,0.6)';
-      ctx.lineWidth = r.width * r.life;
-      ctx.beginPath(); ctx.arc(r.x, r.y, r.radius, 0, Math.PI*2); ctx.stroke();
-      ctx.globalAlpha = r.life * 0.08;
-      ctx.fillStyle = 'rgba(148,191,255,0.3)';
-      ctx.beginPath(); ctx.arc(r.x, r.y, r.radius, 0, Math.PI*2); ctx.fill();
-      ctx.restore();
-    }
-
-    // ── Layer: Floating Icons with Trails ──
-    for(const f of iconFloats){
-      f.y -= f.speed;
-      f.wobble += f.wobbleSpeed;
-      f.x += Math.sin(f.wobble) * f.wobbleAmp * 0.008;
-      f.rotation += f.rotSpeed;
-
-      // trail
-      f.trail.push({x: f.x, y: f.y, r: f.rotation});
-      if(f.trail.length > 8) f.trail.shift();
-
-      // draw trail
-      for(let t=0;t<f.trail.length;t++){
-        const alpha = (t / f.trail.length) * f.opacity * 0.5;
-        ctx.save();
-        ctx.translate(f.trail[t].x, f.trail[t].y);
-        ctx.rotate(f.trail[t].r);
-        ctx.globalAlpha = alpha;
-        drawIcon(ctx, f.type, f.size * (0.5 + t/f.trail.length*0.5), 'rgba(148,191,255,0.2)', 0.8);
-        ctx.restore();
-      }
-
-      // main icon
-      ctx.save();
-      ctx.translate(f.x, f.y);
-      ctx.rotate(f.rotation);
-      ctx.globalAlpha = f.opacity;
-      drawIcon(ctx, f.type, f.size, 'rgba(255,255,255,0.25)', 1.2);
-      ctx.restore();
-
-      if(f.y < -80) { f.y = H+20; f.x = Math.random()*W; f.trail = []; }
-    }
-
-    // ── Spawn new effects ──
-    if(time % 120 === 0 && shootingStars.length < 5) spawnShootingStar();
-    if(time % 90 === 0 && pulseRings.length < 6) spawnPulse();
-
-    requestAnimationFrame(animate);
-  }
-  animate();
-})();
+  });
+}, { threshold: 0.5 });
+countups.forEach(el => countObserver.observe(el));
 </script>
+
 </body>
 </html>
-
-
