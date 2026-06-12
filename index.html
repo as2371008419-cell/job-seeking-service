@@ -36,7 +36,7 @@ body{
 /* ===== Progress Bar ===== */
 .progress-bar{
   position:fixed;top:0;left:0;width:0;height:3px;
-  background:linear-gradient(90deg,var(--gold-2),var(--silver));
+  background:linear-gradient(90deg,var(--blue-2),var(--blue-3));
   z-index:1001;transition:width 0.3s ease;
 }
 
@@ -52,14 +52,14 @@ body{
 /* ===== Hero ===== */
 .hero{
   position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(160deg,var(--dark-1) 0%,var(--dark-2) 30%,#1A1210 60%,var(--dark-1) 100%);
+  background:linear-gradient(160deg,var(--blue-1) 0%,var(--blue-2) 50%,var(--blue-3) 100%);
   overflow:hidden;padding:2rem;
 }
 .hero::before{
   content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse at 20% 30%,rgba(212,168,67,0.08) 0%,transparent 50%),
-    radial-gradient(ellipse at 80% 70%,rgba(192,192,192,0.06) 0%,transparent 50%);
+    radial-gradient(ellipse at 20% 30%,rgba(74,140,255,0.15) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 70%,rgba(148,191,255,0.08) 0%,transparent 50%);
   pointer-events:none;
 }
 .hero-canvas{
@@ -69,8 +69,8 @@ body{
 .hero-overlay{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse at 50% 0%,rgba(212,168,67,0.12) 0%,transparent 50%),
-    radial-gradient(ellipse at 50% 100%,rgba(192,192,192,0.08) 0%,transparent 40%);
+    radial-gradient(ellipse at 50% 0%,rgba(148,191,255,0.15) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 100%,rgba(74,140,255,0.1) 0%,transparent 40%);
   pointer-events:none;
 }
 .hero-content{
@@ -78,37 +78,33 @@ body{
 }
 .hero-badge{
   display:inline-block;padding:0.4rem 1.5rem;border-radius:999px;
-  background:linear-gradient(135deg,rgba(212,168,67,0.15),rgba(192,192,192,0.1));
-  color:var(--gold-2);font-size:0.82rem;letter-spacing:0.05em;margin-bottom:1.5rem;
-  backdrop-filter:blur(4px);border:1px solid rgba(212,168,67,0.25);
+  background:rgba(255,255,255,0.15);color:var(--blue-4);
+  font-size:0.82rem;letter-spacing:0.05em;margin-bottom:1.5rem;
+  backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);
 }
 .hero h1{
   font-size:clamp(2.2rem,5vw,4rem);font-weight:800;color:var(--white);
   line-height:1.2;margin-bottom:1rem;
 }
-.hero h1 span{background:linear-gradient(135deg,var(--gold-2),var(--silver),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero h1 span{background:linear-gradient(135deg,#fff,var(--blue-4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{
-  font-size:clamp(1rem,2vw,1.2rem);color:rgba(192,192,192,0.8);margin-bottom:2.5rem;line-height:1.8;
+  font-size:clamp(1rem,2vw,1.2rem);color:var(--blue-5);margin-bottom:2.5rem;line-height:1.8;
 }
 .hero-stats{
   display:flex;justify-content:center;gap:clamp(1.5rem,4vw,4rem);flex-wrap:wrap;
 }
 .hero-stat{text-align:center}
 .hero-stat-num{
-  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;
-  background:linear-gradient(135deg,var(--gold-2),var(--silver));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--white);line-height:1;
 }
-.hero-stat-label{font-size:0.85rem;color:rgba(192,192,192,0.7);margin-top:0.3rem}
+.hero-stat-label{font-size:0.85rem;color:var(--blue-4);margin-top:0.3rem}
 .hero-cta{
   margin-top:2.5rem;display:inline-flex;align-items:center;gap:0.6rem;
   padding:0.9rem 2.5rem;border-radius:999px;
-  background:linear-gradient(135deg,var(--gold-2),var(--silver));
-  color:var(--dark-1);font-weight:800;font-size:1.05rem;
-  text-decoration:none;transition:all 0.3s ease;box-shadow:0 4px 25px rgba(212,168,67,0.3);
+  background:var(--white);color:var(--blue-2);font-weight:800;font-size:1.05rem;
+  text-decoration:none;transition:all 0.3s ease;box-shadow:0 4px 25px rgba(255,255,255,0.25);
 }
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(212,168,67,0.4)}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(255,255,255,0.35)}
 .hero-cta svg{width:20px;height:20px;transition:transform 0.3s}
 .hero-cta:hover svg{transform:translateX(4px)}
 .hero-scroll-hint{
